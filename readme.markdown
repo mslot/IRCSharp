@@ -1,6 +1,6 @@
 IRCSharp
 ========
-IRCSharp is a modular IRC robot. Through a simple contract it is possible to extend the robot  with new commands, at runtime without rebooting. I am in process of writing a quick start.
+IRCSharp is a modular IRC robot. Through a simple contract it is possible to extend the robot  with new commands, at runtime without rebooting.
 
 Quickstart
 ----------
