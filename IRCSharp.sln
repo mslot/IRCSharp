@@ -5,7 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.Kernel", "IRCSharp.Kernel\IRCSharp.Kernel.csproj", "{2BCF5B79-0118-4D68-9A19-0FFFEC117685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRC.ConsoleRunner", "IRCSharp.ConsoleRunner\IRCSharp.ConsoleRunner.csproj", "{EC6A60B7-D163-4F6B-AB73-C37521287924}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.ConsoleRunner", "IRCSharp.ConsoleRunner\IRCSharp.ConsoleRunner.csproj", "{EC6A60B7-D163-4F6B-AB73-C37521287924}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3CB31D35-153F-4ECA-B059-9428E6C702B8}"
+	ProjectSection(SolutionItems) = preProject
+		readme.markdown = readme.markdown
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
