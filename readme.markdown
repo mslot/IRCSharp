@@ -9,12 +9,10 @@ This is an alpha release. So there is many UNKNOWN bugs. Be aware that this bot 
 + Netsplits
 + Mass querying the bot (and flooding the channel)
 
-Tested with
------------
-I have written some unit tests to support the two parsers. I have only tests the minimum required so I can get the bot up and running. If bugs is detected, let me know and I will patch the bot and
-
-+ Update the tests.
-+ The bot is only tested on Quakenet.
+Tested
+------
+I have written some unit tests to support the two parsers. I have only tests the minimum required so I can get the bot up and running. If bugs is detected, let me know and I will patch the bot and update the tests.
+The bot is only tested on Quakenet.
 
 License
 -------
