@@ -33,13 +33,13 @@ namespace IRCSharp.Kernel.Collecters
 
 		void _dllWatcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
 		{
-			ICommand<string, IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandQuery>>(e.FullPath);
+			ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(e.FullPath);
 			CommandManager.RemoveUserdefinedCommand(command.Name);
 		}
 
 		void _dllWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
-			ICommand<string, IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandQuery> newCommand = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandQuery>>(e.FullPath);
+			ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> newCommand = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(e.FullPath);
 			newCommand.Location = e.FullPath;
 
 			CommandManager.InsertUserdefinedCommand(newCommand);

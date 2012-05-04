@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Kernel.Parser.IRC
+namespace IRCSharp.Kernel.Query
 {
 	/*
 	 * Responses from server. This is either:

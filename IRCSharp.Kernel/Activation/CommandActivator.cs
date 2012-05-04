@@ -14,7 +14,7 @@ namespace IRCSharp.Kernel.Activation
 			_commandManager = commandManager;
 		}
 
-		public string Invoke(Parser.IRC.Query query)
+		public string Invoke(Query.IRCCommandQuery query)
 		{
 			return null;
 		}

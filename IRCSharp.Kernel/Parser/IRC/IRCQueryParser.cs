@@ -6,70 +6,35 @@ using System.Text;
 namespace IRCSharp.Kernel.Parser.IRC
 {
 	/*
-	 * TODO clean up this mess. There are to much state held in this parser.
+	 * TODO clean up this mess. There are to much state held in this parser. Move out to a Context behaps?
 	 */
 	public class IRCQueryParser
 	{
 		public IParsable CurrentState { get; private set; }
 		public String Line { get; private set; }
-		public Query Query { get; set; }
-		public ParserStatus ParserStatus { get; private set; }
-		private static IRCQueryParser _instance = null;
-
-		public bool IsParsable
-		{
-			get
-			{
-				if (ParserStatus == null)
-				{
-					return false;
-				}
-				else
-				{
-					return !ParserStatus.IsError;
-				}
-			}
-		}
-
-		protected int CharCount
-		{
-			get
-			{
-				if (ParserStatus == null)
-				{
-					return 0;
-				}
-				else
-				{
-					return ParserStatus.CharCount;
-				}
-			}
-		}
+		public Query.IRCCommandQuery Query { get; set; }
+		public int CharCount { get; set; }
 
 		private IRCQueryParser()
 		{
 		}
 
-		public static bool TryParse(string line, out Query query)
+		public static bool TryParse(string line, out Query.IRCCommandQuery query)
 		{
-			_instance = new IRCQueryParser();
-			_instance.Line = line;
-			_instance.Query = new Query(line);
-			_instance.Query = query = _instance.Parse();
-			bool isLineParseable = _instance.IsParsable;
+			var instance = new IRCQueryParser();
+			instance.Line = line;
+			instance.Query = new Query.IRCCommandQuery(line);
+			instance.Query = query = instance.Parse();
+			bool errorProcessing = (instance.CharCount != -1);
+			bool errorReachingEnd = (instance.CharCount == instance.Line.Length);
 
-			return isLineParseable;
+			return errorProcessing && errorReachingEnd;
 		}
 
-		private Query Parse()
+		private Query.IRCCommandQuery Parse()
 		{
 			SetStartState();
-			while (!(ParserStatus = CurrentState.Parse()).IsError && !ParserStatus.Done) ;
-
-			//if (ParserStatus.IsError)
-			//{
-			//    throw ParserStatus.Exception ?? new Exception("something unexpected happened in the state.");
-			//}
+			while ((CharCount != -1) && ((CharCount = CurrentState.Parse()) != Line.Length)) ;
 
 			return Query;
 		}

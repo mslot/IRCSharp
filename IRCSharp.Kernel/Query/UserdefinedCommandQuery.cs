@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Kernel.Parser.UserdefinedCommand
+namespace IRCSharp.Kernel.Query
 {
 	public class UserdefinedCommandQuery
 	{
-		public Parser.IRC.Query IRCQuery { get; private set; }
+		private IRCCommandQuery ircQuery;
+
+		public string From { get; private set;}
+		public string To { get; private set; }
+		public IRCCommandQuery IRCQuery { get; private set; }
 		public List<string> Parameters { get; private set; }
 		public string CommandName { get; private set; }
 
-		public UserdefinedCommandQuery( string commandName, Parser.IRC.Query ircQuery)
+		public UserdefinedCommandQuery(string to, string from, string commandName, Query.IRCCommandQuery ircQuery)
 		{
+			From = from;
+			To = to;
 			CommandName = commandName;
 			IRCQuery = ircQuery;
 			Parameters = new List<string>();

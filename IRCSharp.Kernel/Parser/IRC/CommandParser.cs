@@ -16,35 +16,31 @@ namespace IRCSharp.Kernel.Parser.IRC
 			_line = queryTokensizerParser.Line;
 		}
 
-		public ParserStatus Parse()
+		public int Parse()
 		{
-			ParserStatus parserStatus = new ParserStatus { Name = "parsing command success.", Message = "parsed following command: ", Exception = null };
-			_queryTokensizerParser.Query.Command = ParseResponseCommand(_line, ref parserStatus);
+			int nextCharCount = ParseResponseCommand(_line);
 			_queryTokensizerParser.SetParseParamsState();
 
-			return parserStatus;
+			return nextCharCount;
 		}
 
-		private ResponseCommand ParseResponseCommand(string line, ref ParserStatus parserStatus)
+		private int ParseResponseCommand(string line)
 		{
-			ResponseCommand responseCommand = ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
-
+			Query.ResponseCommand responseCommand = Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			int nextCharCount = -1;
 			if (!String.IsNullOrEmpty(line))
 			{
 				//look between CharCount and next space for the command type
-				int charCount = GetCharCount(_queryTokensizerParser.ParserStatus.CharCount);
+				int charCount = GetCharCount(_queryTokensizerParser.CharCount);
 				int nextWhitespace = line.IndexOf(" ", charCount);
-				int length = nextWhitespace - _queryTokensizerParser.ParserStatus.CharCount;
-				string command = line.Substring(charCount, length).Trim(); 
-				responseCommand = DetermineResponseCommand(command, ref parserStatus);
-				parserStatus.CharCount = nextWhitespace;
-			}
-			else
-			{
-				parserStatus = new ParserStatus { Exception = new Exception("The command received is not an official IRC command."), IsError = true, Message = "Failed parsing command.", Name = "failed parsing command." };
+				int length = nextWhitespace - _queryTokensizerParser.CharCount;
+				string command = line.Substring(charCount, length).Trim();
+				responseCommand = DetermineResponseCommand(command);
+				_queryTokensizerParser.Query.Command = responseCommand;
+				nextCharCount  = nextWhitespace;
 			}
 
-			return responseCommand;
+			return nextCharCount;
 		}
 
 		private int GetCharCount(int charCount)
@@ -59,31 +55,20 @@ namespace IRCSharp.Kernel.Parser.IRC
 			}
 		}
 
-		private ResponseCommand DetermineResponseCommand(string command, ref ParserStatus parserStatus)
+		private Query.ResponseCommand DetermineResponseCommand(string command)
 		{
-			ResponseCommand message = default(ResponseCommand);
+			Query.ResponseCommand message = default(Query.ResponseCommand);
 			switch (command)
 			{
-				case "422": message = ResponseCommand.ERR_NOMOTD; break;
-				case "375": message = ResponseCommand.RPL_MOTDSTART; break;
-				case "372": message = ResponseCommand.RPL_MOTD; break;
-				case "376": message = ResponseCommand.RPL_ENDOFMOTD; break;
-				case "221": message = ResponseCommand.RPL_UMODEIS; break;
-				case "005": message = ResponseCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
-				case "PRIVMSG": message = ResponseCommand.PRIVMSG; break;
-				case "PING": message = ResponseCommand.PING; break;
-				case "JOIN": message = ResponseCommand.JOIN; break;
-				default: parserStatus = new ParserStatus { Exception = new Exception("The command received is not an official IRC command."), IsError = true, Message = "Failed parsing command.", Name = "failed parsing command." }; break;
-			}
-
-			if (!parserStatus.IsError)
-			{
-				parserStatus.Message += " " + command;
-			}
-
-			if (message == ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE)
-			{
-				parserStatus = new ParserStatus { Exception = new Exception("The command received is not an official IRC command."), IsError = true, Message = "Failed parsing command.", Name = "failed parsing command." };
+				case "422": message = Query.ResponseCommand.ERR_NOMOTD; break;
+				case "375": message = Query.ResponseCommand.RPL_MOTDSTART; break;
+				case "372": message = Query.ResponseCommand.RPL_MOTD; break;
+				case "376": message = Query.ResponseCommand.RPL_ENDOFMOTD; break;
+				case "221": message = Query.ResponseCommand.RPL_UMODEIS; break;
+				case "005": message = Query.ResponseCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
+				case "PRIVMSG": message = Query.ResponseCommand.PRIVMSG; break;
+				case "PING": message = Query.ResponseCommand.PING; break;
+				case "JOIN": message = Query.ResponseCommand.JOIN; break;
 			}
 
 			return message;

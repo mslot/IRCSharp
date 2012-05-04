@@ -7,6 +7,6 @@ namespace IRCSharp.Kernel.Activation
 {
 	public interface ICommandActivator
 	{
-		string Invoke(Parser.IRC.Query query);
+		string Invoke(Query.IRCCommandQuery query);
 	}
 }

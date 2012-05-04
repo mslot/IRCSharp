@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Bot
 {
-	public delegate void QueryParsedHandler(IRCSharp.Kernel.Parser.IRC.Query query);
+	public delegate void QueryParsedHandler(IRCSharp.Kernel.Query.IRCCommandQuery query);
 	public delegate void IncomingHandler(string line);
 
 	public class IRCBot
@@ -26,7 +26,7 @@ namespace IRCSharp.Kernel.Bot
 		private string _hostname;
 		private string _channels;
 
-		private void OnQueryParsed(IRCSharp.Kernel.Parser.IRC.Query query)
+		private void OnQueryParsed(IRCSharp.Kernel.Query.IRCCommandQuery query)
 		{
 			if (QueryParsed != null)
 			{
@@ -82,12 +82,12 @@ namespace IRCSharp.Kernel.Bot
 			while (run && (line = _clientReader.ReadLine()) != null)
 			{
 				OnIncoming(line);
-				Parser.IRC.Query query = new Parser.IRC.Query(line);
+				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
 					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _clientWriter);
 					incomingThread.Start();
-					if (query.Command == Parser.IRC.ResponseCommand.RPL_ENDOFMOTD || query.Command == Parser.IRC.ResponseCommand.ERR_NOMOTD)
+					if (query.Command == Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Query.ResponseCommand.ERR_NOMOTD)
 					{
 						OnQueryParsed(query);
 						_clientWriter.WriteLine(String.Format("JOIN {0}", _channels));
@@ -111,7 +111,7 @@ namespace IRCSharp.Kernel.Bot
 				while (run && (line = _clientReader.ReadLine()) != null)
 				{
 					OnIncoming(line);
-					Parser.IRC.Query query = new Parser.IRC.Query(line);
+					Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 					if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 					{
 						OnQueryParsed(query);

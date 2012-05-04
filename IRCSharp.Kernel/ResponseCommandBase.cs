@@ -5,10 +5,10 @@ using System.Text;
 
 namespace IRCSharp.Kernel
 {
-	public abstract class ResponseCommandBase : ICommand<IRCSharp.Kernel.Parser.IRC.ResponseCommand, IRCSharp.Kernel.Parser.IRC.Query>
+	public abstract class ResponseCommandBase : ICommand<IRCSharp.Kernel.Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>
 	{
 		public string Location { get; set; }
-		public abstract string Execute(IRCSharp.Kernel.Parser.IRC.Query query);
-		public abstract Parser.IRC.ResponseCommand Name {get;}
+		public abstract string Execute(IRCSharp.Kernel.Query.IRCCommandQuery query);
+		public abstract Query.ResponseCommand Name {get;}
 	}
 }

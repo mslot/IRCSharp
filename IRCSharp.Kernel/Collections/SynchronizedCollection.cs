@@ -105,6 +105,41 @@ namespace IRCSharp.Collections
 
 		}
 
+		public T TryGet(U key)
+		{
+			T value = default(T);
+			_lock.EnterReadLock();
+			try
+			{
+				if (_collection.ContainsKey(key))
+				{
+					value = _collection[key];
+				}
+			}
+			finally
+			{
+				_lock.ExitWriteLock();
+			}
+
+			return value;
+		}
+
+		public void TryInsert(U key, T value)
+		{
+			_lock.EnterWriteLock();
+			try
+			{
+				if (!_collection.ContainsKey(key))
+				{
+					_collection[key] = value;
+				}
+			}
+			finally
+			{
+				_lock.ExitWriteLock();
+			}
+		}
+
 		/// <summary>
 		/// Creates an enumerator.
 		/// </summary>

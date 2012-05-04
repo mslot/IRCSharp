@@ -13,15 +13,22 @@ namespace UnitTest.UserdefinedCommand
 		public void QueryParseTestParsingUserdefinedCommand()
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!command arg1 arg2 arg3";
-			IRCSharp.Kernel.Parser.IRC.Query ircQuery = null;
+			IRCSharp.Kernel.Query.IRCCommandQuery ircQuery = null;
 			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
 
 			Assert.True(parsedIRCQuery);
 
-			IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandQuery userdefinedCommandQuery;
+			IRCSharp.Kernel.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			bool parsedUserdefinedCommand = IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(ircQuery, out userdefinedCommandQuery);
 
+			Assert.NotNull(userdefinedCommandQuery);
 			Assert.True(parsedUserdefinedCommand);
+			Assert.AreEqual("mslot", userdefinedCommandQuery.From);
+			Assert.AreEqual("#mslot.dk", userdefinedCommandQuery.To);
+			Assert.AreEqual("command", userdefinedCommandQuery.CommandName);
+			Assert.Contains("arg1", userdefinedCommandQuery.Parameters);
+			Assert.Contains("arg2", userdefinedCommandQuery.Parameters);
+			Assert.Contains("arg3", userdefinedCommandQuery.Parameters);
 
 		}
 	}

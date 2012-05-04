@@ -16,30 +16,40 @@ namespace IRCSharp.Kernel.Parser.IRC
 			_line = queryTokensizerParser.Line;
 		}
 
-		public ParserStatus Parse()
+		public int Parse()
 		{
-			if (_line.StartsWith(":"))
+			int nextCharCount = 0;
+			if (_line.StartsWith(":")) //server sent us an message
 			{
-				_queryTokensizerParser.Query.Prefix = ParsePrefixString(_line);
-				_queryTokensizerParser.SetCommandParserState();
-				return new ParserStatus { IsError = false, Message = "Prefix found.", Name = "Prefix parsing.", CharCount = GetIndexOfSeperation() };
+				nextCharCount = ParsePrefixString(_line);
 			}
 			else
 			{
 				_queryTokensizerParser.Query.Prefix = String.Empty;
-				_queryTokensizerParser.SetCommandParserState();
-				return new ParserStatus { Message = "Prefix not found. Going on to parse command.", Name = "Prefix parsing." };
 			}
+
+			if (_line.Length > 0) //we only want to proceed if the line is not empty
+			{
+				_queryTokensizerParser.SetCommandParserState();
+			}
+			else //if the line is empty, then we know we have an error.
+			{
+				nextCharCount = -1;
+			}
+
+			return nextCharCount;
 		}
 
-		private string ParsePrefixString(string line)
+		private int ParsePrefixString(string line)
 		{
-			return line
+			_queryTokensizerParser.Query.Prefix = line
 				.Substring(
 					line.IndexOf(":") + 1,
 					GetIndexOfSeperation() - line.IndexOf(":")
 				)
 				.Trim();
+
+			return GetIndexOfSeperation();
 		}
 
 		private int GetIndexOfSeperation()

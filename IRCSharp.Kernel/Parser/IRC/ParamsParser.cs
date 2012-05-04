@@ -16,21 +16,24 @@ namespace IRCSharp.Kernel.Parser.IRC
 			this._line = _queryTokensizerParser.Line;
 		}
 
-		public ParserStatus Parse()
+		public int Parse()
 		{
-			ParserStatus parserStatus = new ParserStatus();
-			string parsedParams = ParseParamsString(_line, out parserStatus);
-			_queryTokensizerParser.Query.Parameter = parsedParams.Trim();
+			int nextCharCount = ParseParamsString(_line);
 
-			return parserStatus;
+			return nextCharCount;
 		}
 
-		private string ParseParamsString(string line, out ParserStatus parserStatus)
+		private int ParseParamsString(string line)
 		{
-			string parsedParams = line.Substring(_queryTokensizerParser.ParserStatus.CharCount, line.Length - _queryTokensizerParser.ParserStatus.CharCount);
-			parserStatus = new ParserStatus { IsError = false, Done = true, CharCount = line.Length, Exception = null, Message = "Done parsing params.", Name = "Parsed params." };
+			int nextCharCount = -1;
+			if (_queryTokensizerParser.CharCount != -1)
+			{
+				string parsedParams = line.Substring(_queryTokensizerParser.CharCount, line.Length - _queryTokensizerParser.CharCount);
+				_queryTokensizerParser.Query.Parameter = parsedParams.Trim();
+				nextCharCount = line.Length;
+			}
 
-			return parsedParams;
+			return nextCharCount;
 		}
 	}
 }

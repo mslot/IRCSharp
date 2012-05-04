@@ -7,6 +7,6 @@ namespace IRCSharp.Kernel.Parser.IRC
 {
     public interface IParsable
     {
-        ParserStatus Parse();
+        int Parse();
     }
 }
