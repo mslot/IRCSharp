@@ -7,19 +7,19 @@ namespace IRCSharp.Kernel.Parser.IRC
 {
 	class CommandParser : IParsable
 	{
-		private IRCQueryParser _queryTokensizerParser = null;
+		private IRCParserContext _context= null;
 		private string _line = String.Empty;
 
-		public CommandParser(IRCQueryParser queryTokensizerParser)
+		public CommandParser(IRCParserContext context)
 		{
-			this._queryTokensizerParser = queryTokensizerParser;
-			_line = queryTokensizerParser.Line;
+			_context = context;
+			_line = _context.Line;
 		}
 
 		public int Parse()
 		{
 			int nextCharCount = ParseResponseCommand(_line);
-			_queryTokensizerParser.SetParseParamsState();
+			_context.CurrentState = new ParamsParser(_context);
 
 			return nextCharCount;
 		}
@@ -31,12 +31,12 @@ namespace IRCSharp.Kernel.Parser.IRC
 			if (!String.IsNullOrEmpty(line))
 			{
 				//look between CharCount and next space for the command type
-				int charCount = GetCharCount(_queryTokensizerParser.CharCount);
+				int charCount = GetCharCount(_context.CharCount);
 				int nextWhitespace = line.IndexOf(" ", charCount);
-				int length = nextWhitespace - _queryTokensizerParser.CharCount;
+				int length = nextWhitespace - _context.CharCount;
 				string command = line.Substring(charCount, length).Trim();
 				responseCommand = DetermineResponseCommand(command);
-				_queryTokensizerParser.Query.Command = responseCommand;
+				_context.Query.Command = responseCommand;
 				nextCharCount  = nextWhitespace;
 			}
 

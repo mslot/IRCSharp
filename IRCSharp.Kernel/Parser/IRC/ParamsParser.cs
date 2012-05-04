@@ -7,13 +7,13 @@ namespace IRCSharp.Kernel.Parser.IRC
 {
 	class ParamsParser : IParsable
 	{
-		private IRCQueryParser _queryTokensizerParser;
+		private IRCParserContext _context;
 		private string _line = String.Empty;
 
-		public ParamsParser(IRCQueryParser queryTokensizerParser)
+		public ParamsParser(IRCParserContext _context)
 		{
-			this._queryTokensizerParser = queryTokensizerParser;
-			this._line = _queryTokensizerParser.Line;
+			this._context = _context;
+			this._line = _context.Line;
 		}
 
 		public int Parse()
@@ -26,10 +26,10 @@ namespace IRCSharp.Kernel.Parser.IRC
 		private int ParseParamsString(string line)
 		{
 			int nextCharCount = -1;
-			if (_queryTokensizerParser.CharCount != -1)
+			if (_context.CharCount != -1)
 			{
-				string parsedParams = line.Substring(_queryTokensizerParser.CharCount, line.Length - _queryTokensizerParser.CharCount);
-				_queryTokensizerParser.Query.Parameter = parsedParams.Trim();
+				string parsedParams = line.Substring(_context.CharCount, line.Length - _context.CharCount);
+				_context.Query.Parameter = parsedParams.Trim();
 				nextCharCount = line.Length;
 			}
 

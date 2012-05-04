@@ -21,7 +21,7 @@ namespace IRCSharp.Kernel.Threading
 
 		public override void Task()
 		{
-			List<IRCSharp.Kernel.ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>> ircCommands = _commandManager.GetIRCCommand(_query.Command);
+			List<IRCSharp.Kernel.ICommand<Query.ResponseCommand, Query.IRCCommandQuery>> ircCommands = _commandManager.GetIRCCommand(_query.Command);
 
 			if (ircCommands != null)
 			{
@@ -35,12 +35,15 @@ namespace IRCSharp.Kernel.Threading
 			Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			if (Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(_query, out userdefinedCommandQuery))
 			{
-				var userdefinedCommands = _commandManager.GetUserdefinedCommand(userdefinedCommandQuery.CommandName);
+				List<IRCSharp.Kernel.ICommand<string, Query.UserdefinedCommandQuery>> userdefinedCommands = _commandManager.GetUserdefinedCommand(userdefinedCommandQuery.CommandName);
 
-				foreach (var userdefinedCommand in userdefinedCommands)
+				if (userdefinedCommands != null)
 				{
-					string output = userdefinedCommand.Execute(userdefinedCommandQuery);
-					(new OutputThread(_textWriter, output)).Start();
+					foreach (var userdefinedCommand in userdefinedCommands)
+					{
+						string output = userdefinedCommand.Execute(userdefinedCommandQuery);
+						(new OutputThread(_textWriter, output)).Start();
+					}
 				}
 			}
 

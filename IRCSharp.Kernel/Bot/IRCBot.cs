@@ -61,6 +61,7 @@ namespace IRCSharp.Kernel.Bot
 
 		public void Start()
 		{
+			_commandCollecter.Start();
 			JoinServer();
 			JoinChannels();
 			StartListning();

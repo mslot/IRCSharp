@@ -118,7 +118,7 @@ namespace IRCSharp.Collections
 			}
 			finally
 			{
-				_lock.ExitWriteLock();
+				_lock.ExitReadLock();
 			}
 
 			return value;

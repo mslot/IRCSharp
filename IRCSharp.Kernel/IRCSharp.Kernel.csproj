@@ -46,6 +46,7 @@
     <Compile Include="Collections\SynchronizedCollection.cs" />
     <Compile Include="Collectors\CommandCollecter.cs" />
     <Compile Include="Parser\IQuery.cs" />
+    <Compile Include="Parser\IRC\IRCParserContext.cs" />
     <Compile Include="Parser\UserdefinedCommand\UserdefinedCommandParser.cs" />
     <Compile Include="Query\UserdefinedCommandQuery.cs" />
     <Compile Include="ResponseCommandBase.cs" />

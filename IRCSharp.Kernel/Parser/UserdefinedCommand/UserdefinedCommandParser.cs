@@ -19,7 +19,7 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 			UserdefinedCommandParser parser = new UserdefinedCommandParser();
 			bool parsed = false;
 			Query.UserdefinedCommandQuery query = null;
-			if (ircQuery.Command == Query.ResponseCommand.PRIVMSG)
+			if (ircQuery.Command == Query.ResponseCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))
 			{
 				string to = parser.ParseTo(ircQuery.Parameter);
 				string from = parser.ParseFrom(ircQuery.Prefix);
@@ -32,6 +32,18 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 
 			userdefinedCommandQuery = query;
 			return parsed;
+		}
+
+		private static bool IsUserdefinedCommand(string ircParameter)
+		{
+			int start = ircParameter.IndexOf(':');
+
+			if (ircParameter.Substring(start+1, 1) == "!")
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -74,6 +86,11 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 			int start = ircQueryParameter.IndexOf(':') + 2;
 			int to = ircQueryParameter.IndexOf(' ', start);
 
+			if (to == -1) //there is no parameters eg. no whitespace
+			{
+				to = ircQueryParameter.Length;
+			}
+
 			return ircQueryParameter.Substring(start, to - start);
 		}
 
@@ -88,9 +105,12 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 			int firstWhitespace = ircQueryParameter.IndexOf(' ', start);
 			IList<string> parameters = new List<string>();
 
-			foreach (string parameter in ircQueryParameter.Substring(firstWhitespace, ircQueryParameter.Length - firstWhitespace).Split(' '))
+			if (firstWhitespace != -1) //if first whitespace is -1 then there is no parameters
 			{
-				parameters.Add(parameter);
+				foreach (string parameter in ircQueryParameter.Substring(firstWhitespace, ircQueryParameter.Length - firstWhitespace).Split(' '))
+				{
+					parameters.Add(parameter);
+				}
 			}
 
 			return parameters;

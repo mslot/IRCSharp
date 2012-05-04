@@ -13,6 +13,7 @@ namespace IRCSharp.Kernel.Collecters
 		public CommandCollecter(string directoryPath)
 		{
 			CommandManager = new Manager.CommandManager();
+			InitDirectory(directoryPath);
 			_dllWatcher = new Watchers.DllFileWatcher(directoryPath);
 			_dllWatcher.Changed += new System.IO.FileSystemEventHandler(_dllWatcher_Changed);
 			_dllWatcher.Created += new System.IO.FileSystemEventHandler(_dllWatcher_Created);
@@ -24,6 +25,18 @@ namespace IRCSharp.Kernel.Collecters
 		public void Start()
 		{
 			_dllWatcher.Start();
+		}
+
+		private void InitDirectory(string directoryPath)
+		{
+			foreach (string absoluteFilePath in System.IO.Directory.GetFiles(directoryPath))
+			{
+				ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> newCommand = 
+					Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+				newCommand.Location = absoluteFilePath;
+
+				CommandManager.InsertUserdefinedCommand(newCommand);
+			}
 		}
 
 		public void Stop()

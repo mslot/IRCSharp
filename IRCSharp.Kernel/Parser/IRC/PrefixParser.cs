@@ -7,17 +7,17 @@ namespace IRCSharp.Kernel.Parser.IRC
 {
 	internal class PrefixParser : IParsable
 	{
-		private IRCQueryParser _queryTokensizerParser = null;
+		private IRCParserContext _context = null;
 		private string _line = String.Empty;
 
-		public PrefixParser(IRCQueryParser queryTokensizerParser)
+		public PrefixParser(IRCParserContext context)
 		{
-			_queryTokensizerParser = queryTokensizerParser;
-			_line = queryTokensizerParser.Line;
+			_context = context;
 		}
 
 		public int Parse()
 		{
+			_line = _context.Line;
 			int nextCharCount = 0;
 			if (_line.StartsWith(":")) //server sent us an message
 			{
@@ -25,12 +25,12 @@ namespace IRCSharp.Kernel.Parser.IRC
 			}
 			else
 			{
-				_queryTokensizerParser.Query.Prefix = String.Empty;
+				_context.Query.Prefix = String.Empty;
 			}
 
 			if (_line.Length > 0) //we only want to proceed if the line is not empty
 			{
-				_queryTokensizerParser.SetCommandParserState();
+				_context.CurrentState = new CommandParser(_context);
 			}
 			else //if the line is empty, then we know we have an error.
 			{
@@ -42,7 +42,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 
 		private int ParsePrefixString(string line)
 		{
-			_queryTokensizerParser.Query.Prefix = line
+			_context.Query.Prefix = line
 				.Substring(
 					line.IndexOf(":") + 1,
 					GetIndexOfSeperation() - line.IndexOf(":")
