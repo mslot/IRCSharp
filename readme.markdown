@@ -4,7 +4,7 @@ IRCSharp is a modular IRC robot. Through a simple contract it is possible to ext
 
 Known bugs
 ----------
-This is an alpha release!! So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
+This is an alpha release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
 
 + Netsplits
 + Mass querying the bot (and flooding the channel)
@@ -19,4 +19,5 @@ I have written some unit tests to support the two parsers. I have only tests the
 License
 -------
  "THE BEER-WARE LICENSE" (Revision 42):
- <msl0t> wrote this file. As long as you retain this notice you can do whatever you want with this stuff. If we meet some day, and you think this stuff is worth it, you can buy me a beer in return Martin Slot.
+ <msl0t> wrote this file. As long as you retain this notice you can do whatever you want with this stuff. If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.
+  Martin Slot.
