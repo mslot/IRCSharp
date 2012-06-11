@@ -61,7 +61,7 @@ namespace IRCSharp.Kernel.Bot
 
 		private void JoinServer()
 		{
-			_clientWriter.WriteLine(String.Format("USER {0} {1} {2} :{3}", _username, _hostname, _server, _name)); //TODO maybe writer could be moved out in a class that wraps writing know commands
+			_clientWriter.WriteLine(String.Format("USER {0} {1} {2} :{3}", _username, _hostname, _server, _name)); //TODO maybe writer could be moved out in a class that wraps writing known commands
 			_clientWriter.Flush();
 			_clientWriter.WriteLine(String.Format("Nick {0}", _username));
 			_clientWriter.Flush();

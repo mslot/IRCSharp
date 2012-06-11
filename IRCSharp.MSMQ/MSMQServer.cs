@@ -18,7 +18,7 @@ namespace IRCSharp.MSMQ
 			Reader = new MSMQReader<TReceive>(readerQueueName);
 		}
 
-		public override void Start()
+		public void Start()
 		{
 			Reader.ReceivedCompleted += OnReceiveCompleted;
 			Reader.BeginReceive();

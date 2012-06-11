@@ -53,6 +53,7 @@
     <Compile Include="Parser\IRC\IRCParserContext.cs" />
     <Compile Include="Parser\UserdefinedCommand\UserdefinedCommandParser.cs" />
     <Compile Include="Query\UserdefinedCommandQuery.cs" />
+    <Compile Include="Query\Writer\IRCWriter.cs" />
     <Compile Include="ResponseCommandBase.cs" />
     <Compile Include="UserdefinedCommandBase.cs" />
     <Compile Include="Commands\PingCommand.cs" />
