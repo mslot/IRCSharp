@@ -19,6 +19,7 @@ namespace IRCSharp.Kernel.Threading
 			_query = query;
 		}
 
+		//TODO: refactor this method and put logic of method out in seperate class.
 		public override void Task()
 		{
 			List<IRCSharp.Kernel.ICommand<Query.ResponseCommand, Query.IRCCommandQuery>> ircCommands = _commandManager.GetIRCCommand(_query.Command);
@@ -28,7 +29,7 @@ namespace IRCSharp.Kernel.Threading
 				foreach (var command in ircCommands)
 				{
 					string ircCommandOutput = command.Execute(_query);
-					(new OutputThread(_textWriter, ircCommandOutput)).Start();
+					(new OutputThread(_textWriter, ircCommandOutput)).Start(); //TODO: Overkill??
 				}
 			}
 
@@ -42,7 +43,7 @@ namespace IRCSharp.Kernel.Threading
 					foreach (var userdefinedCommand in userdefinedCommands)
 					{
 						string output = userdefinedCommand.Execute(userdefinedCommandQuery);
-						(new OutputThread(_textWriter, output)).Start();
+						(new OutputThread(_textWriter, output)).Start(); //TODO: Overkill??
 					}
 				}
 			}

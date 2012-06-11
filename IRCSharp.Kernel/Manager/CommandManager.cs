@@ -7,6 +7,8 @@ namespace IRCSharp.Kernel.Manager
 {
 	/// <summary>
 	/// Handles commands for the system. 
+	/// 
+	/// TODO: refactor definition of _userdefinedCommands and _ircCommands. Maybe put in seperate class.
 	/// </summary>
 	public class CommandManager
 	{

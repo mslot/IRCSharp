@@ -9,9 +9,9 @@ namespace IRCSharp.Kernel.Manager.Commands
 	{
 		public override string Execute(IRCSharp.Kernel.Query.IRCCommandQuery query)
 		{
-			string[] commands = query.Parameter.Split(':');
+			string[] commands = query.Parameter.Split(':'); //TODO: refactor this. There is a parser that can handle this.
 
-			return "PONG " + commands[1];
+			return "PONG " + commands[1]; //TODO: put in IRCWriter
 		}
 
 		public override IRCSharp.Kernel.Query.ResponseCommand Name
