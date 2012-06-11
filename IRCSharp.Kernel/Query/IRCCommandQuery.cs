@@ -7,10 +7,15 @@ namespace IRCSharp.Kernel.Query
 {
 	public class IRCCommandQuery
 	{
-		public string RawLine { get; private set; }
+		public string RawLine { get; set; }
 		public string Prefix { get; set; }
 		public ResponseCommand Command { get; set; }
 		public string Parameter { get; set; }
+
+		public IRCCommandQuery()
+		{
+
+		}
 
 		public IRCCommandQuery(string line)
 		{

@@ -17,13 +17,7 @@ namespace ConsoleRunner
 			string channels = System.Configuration.ConfigurationManager.AppSettings["channels"];
 
 			var bot = new IRCSharp.Kernel.Bot.IRCBot(server,port,dllPath, username,name, channels);
-			bot.Incoming += Incoming;
 			bot.Start();
-		}
-
-		static void Incoming(string line)
-		{
-			Console.WriteLine(line);
 		}
 	}
 }

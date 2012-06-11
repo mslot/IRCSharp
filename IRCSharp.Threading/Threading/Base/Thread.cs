@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Kernel.Threading.Base
+namespace IRCSharp.Threading.Base
 {
 	public abstract class Thread
 	{

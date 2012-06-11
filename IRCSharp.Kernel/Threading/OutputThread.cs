@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Threading
 {
-	public class OutputThread : IRCSharp.Kernel.Threading.Base.Thread
+	public class OutputThread : IRCSharp.Threading.Base.Thread
 	{
 		private System.IO.TextWriter _textWriter = null;
 		private string _output = String.Empty;

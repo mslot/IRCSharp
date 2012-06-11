@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Threading
 {
-	public class IncomingThread : IRCSharp.Kernel.Threading.Base.Thread
+	public class IncomingThread : IRCSharp.Threading.Base.Thread
 	{
 		private IRCSharp.Kernel.Query.IRCCommandQuery _query = null;
 		private System.IO.TextWriter _textWriter = null;

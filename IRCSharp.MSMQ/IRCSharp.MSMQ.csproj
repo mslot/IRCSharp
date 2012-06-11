@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2BCF5B79-0118-4D68-9A19-0FFFEC117685}</ProjectGuid>
+    <ProjectGuid>{D0440F07-2852-413E-BD56-3C5BC245EE0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IRCSharp.Kernel</RootNamespace>
-    <AssemblyName>IRCSharp.Kernel</AssemblyName>
+    <RootNamespace>IRCSharp.MSMQ</RootNamespace>
+    <AssemblyName>IRCSharp.MSMQ</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,42 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\CommandActivator.cs" />
-    <Compile Include="Activation\ICommandActivator.cs" />
-    <Compile Include="Bot\IRCBot.cs" />
-    <Compile Include="Collections\SynchronizedCollection.cs" />
-    <Compile Include="Collectors\CommandCollecter.cs" />
-    <Compile Include="Messaging\Configuration\MessageServerConfiguration.cs" />
-    <Compile Include="Messaging\MessageClient\MessageClient.cs" />
-    <Compile Include="Messaging\MessageServer\MessageServer.cs" />
-    <Compile Include="Parser\IQuery.cs" />
-    <Compile Include="Parser\IRC\IRCParserContext.cs" />
-    <Compile Include="Parser\UserdefinedCommand\UserdefinedCommandParser.cs" />
-    <Compile Include="Query\UserdefinedCommandQuery.cs" />
-    <Compile Include="ResponseCommandBase.cs" />
-    <Compile Include="UserdefinedCommandBase.cs" />
-    <Compile Include="Commands\PingCommand.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IIdentifiable.cs" />
-    <Compile Include="Query\ResponseCommand.cs" />
-    <Compile Include="Parser\IRC\IParsable.cs" />
-    <Compile Include="Parser\IRC\CommandParser.cs" />
-    <Compile Include="Parser\IRC\ParamsParser.cs" />
-    <Compile Include="Parser\IRC\PrefixParser.cs" />
-    <Compile Include="Query\IRCCommandQuery.cs" />
-    <Compile Include="Parser\IRC\IRCQueryParser.cs" />
+    <Compile Include="MSMQBase.cs" />
+    <Compile Include="MSMQReader.cs" />
+    <Compile Include="MSMQServer.cs" />
+    <Compile Include="MSMQWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\ReflectionUtil.cs" />
-    <Compile Include="Manager\CommandManager.cs" />
-    <Compile Include="Threading\IncomingThread.cs" />
-    <Compile Include="Threading\OutputThread.cs" />
-    <Compile Include="Watchers\DllFileWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IRCSharp.MSMQ\IRCSharp.MSMQ.csproj">
-      <Project>{D0440F07-2852-413E-BD56-3C5BC245EE0E}</Project>
-      <Name>IRCSharp.MSMQ</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IRCSharp.Threading\IRCSharp.Threading.csproj">
       <Project>{1D617C59-75C9-43C3-AC71-A5520AB3478B}</Project>
       <Name>IRCSharp.Threading</Name>
