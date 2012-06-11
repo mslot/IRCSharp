@@ -18,7 +18,8 @@ Tested
 
 I have written some unit tests to support the two parsers. I have only tests the minimum required so I can get the bot up and running. If bugs is detected, let me know and I will patch the bot and update the tests.
 The bot is only tested on Quakenet.
-The MessageQueue have NOT been tested enough yet, so this part is still pretty alpha. More to come on this.
+
+The MessageQueue has NOT been tested enough yet, so this part is still pretty alpha. More to come on this.
 
 License
 -------
