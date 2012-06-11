@@ -4,7 +4,7 @@ IRCSharp is a modular IRC robot. Through a simple contract it is possible to ext
 
 Quick start
 ----------
-See [Quick start guide](https://bitbucket.org/msl0t/ircsharp/wiki/Home).
+See [Quick start guide](https://bitbucket.org/msl0t/ircsharp/wiki/Home). This readme has not been updated yet with examples on how to use the MessageQueue API, but I am in the process of writing on. If you are interested in seeing how it is done, then take a look in the MSMQTestProgram. Remember to install MessageQueue.
 
 Known bugs
 ----------
@@ -15,8 +15,10 @@ This is an alpha release. So there is many UNKNOWN bugs. Be aware that this bot 
 
 Tested
 ------
+
 I have written some unit tests to support the two parsers. I have only tests the minimum required so I can get the bot up and running. If bugs is detected, let me know and I will patch the bot and update the tests.
 The bot is only tested on Quakenet.
+The MessageQueue have NOT been tested enough yet, so this part is still pretty alpha. More to come on this.
 
 License
 -------
