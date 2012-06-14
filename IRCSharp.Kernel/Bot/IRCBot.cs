@@ -57,7 +57,7 @@ namespace IRCSharp.Kernel.Bot
 		public void Stop()
 		{
 			_run = false;
-			_clientWriter.WriteLine("PRIVMSG "+_username+" : goodbye"); //this is done because I want to tricker the _clientReader.ReadLine() after run is set to false
+			_clientWriter.WriteLine("QUIT :goodbye"); //this is done because I want to tricker the _clientReader.ReadLine() after run is set to false
 			_clientWriter.Flush();
 		}
 
