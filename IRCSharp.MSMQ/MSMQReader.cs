@@ -25,17 +25,10 @@ namespace IRCSharp.MSMQ
 		{
 			MessageQueue messageQueueReceived = (MessageQueue)sender;
 
-			try
-			{
 			T message = (T)messageQueueReceived.EndReceive(e.AsyncResult).Body;
 			OnReceivedCompleted(message);
 			messageQueueReceived.BeginReceive();
 
-			}
-			catch (System.Messaging.MessageQueueException exception)
-			{
-			    Console.WriteLine("exception occured" + exception.StackTrace);
-			}
 		}
 
 		private void OnReceivedCompleted(T message)
