@@ -24,11 +24,18 @@ namespace IRCSharp.MSMQ
 		private void MessageQueue_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
 		{
 			MessageQueue messageQueueReceived = (MessageQueue)sender;
+
+			try
+			{
 			T message = (T)messageQueueReceived.EndReceive(e.AsyncResult).Body;
-
 			OnReceivedCompleted(message);
-
 			messageQueueReceived.BeginReceive();
+
+			}
+			catch (System.Messaging.MessageQueueException exception)
+			{
+			    Console.WriteLine("exception occured" + exception.StackTrace);
+			}
 		}
 
 		private void OnReceivedCompleted(T message)

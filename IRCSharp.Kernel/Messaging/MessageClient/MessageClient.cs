@@ -20,9 +20,9 @@ namespace IRCSharp.Kernel.Messaging.MessageClient
 
 		public void Start()
 		{
-			Signup();
 			_msmqServer.ReceiveCompleted += ReceiveCompleted;
 			_msmqServer.Start();
+			Signup();
 		}
 
 		private void ReceiveCompleted(Query.IRCCommandQuery data)

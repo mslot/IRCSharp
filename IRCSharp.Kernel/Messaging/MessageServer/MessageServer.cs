@@ -18,9 +18,22 @@ namespace IRCSharp.Kernel.Messaging.MessageServer
 
 		public void WriteMessage(USend data)
 		{
+			List<string> queuesToRemove = new List<string>();
 			foreach (string queue in _messageQueues)
 			{
-				_msmqServer.WriteData(data, queue);
+				if (System.Messaging.MessageQueue.Exists(queue))
+				{
+					_msmqServer.WriteData(data, queue);
+				}
+				else
+				{
+					queuesToRemove.Add(queue);
+				}
+			}
+
+			foreach (string queue in queuesToRemove)
+			{
+				_messageQueues.Remove(queue);
 			}
 		}
 

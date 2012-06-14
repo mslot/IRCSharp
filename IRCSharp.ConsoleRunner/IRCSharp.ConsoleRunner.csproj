@@ -52,6 +52,10 @@
       <Project>{2BCF5B79-0118-4D68-9A19-0FFFEC117685}</Project>
       <Name>IRCSharp.Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IRCSharp.Threading\IRCSharp.Threading.csproj">
+      <Project>{1D617C59-75C9-43C3-AC71-A5520AB3478B}</Project>
+      <Name>IRCSharp.Threading</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Bot
 {
-	public class IRCBot
+	public class IRCBot : IRCSharp.Threading.Base.Thread
 	{
 		private System.IO.Stream _clientStream = null;
 		private System.Net.Sockets.TcpClient _client = null;
@@ -20,8 +20,9 @@ namespace IRCSharp.Kernel.Bot
 		private string _name;
 		private string _hostname;
 		private string _channels;
+		private volatile bool _run = true;
 
-		public IRCBot(string server, int port, string dllPath, string username, string name, string channels, string hostname = "rubber_duck_robert_bot@hell.org")
+		public IRCBot(string server, int port, string dllPath, string username, string name, string channels, string hostname = "rubber_duck_robert_bot@hell.org") : base("main_bot_thread")
 		{
 			_channels = channels;
 			_username = username;
@@ -39,24 +40,25 @@ namespace IRCSharp.Kernel.Bot
 			_messageServer = new Messaging.MessageServer.MessageServer<Query.IRCCommandQuery>(Messaging.Configuration.MessageServerConfiguration.BotServerQueuePath);
 		}
 
-		public void Start()
+		public override void Task()
+		{
+			StartBot();
+		}
+
+		private void StartBot()
 		{
 			_commandCollecter.Start();
 			_messageServer.Start();
 			JoinServer();
 			JoinChannels();
 			StartListning();
-			Stop();
 		}
 
-		private void Stop()
+		public void Stop()
 		{
-			_commandCollecter.Stop();
-			_client.Close();
-			_clientStream.Close();
-			_clientReader.Close();
-			_clientWriter.Close();
-			_messageServer.Stop();
+			_run = false;
+			_clientWriter.WriteLine("PRIVMSG "+_username+" : goodbye"); //this is done because I want to tricker the _clientReader.ReadLine() after run is set to false
+			_clientWriter.Flush();
 		}
 
 		private void JoinServer()
@@ -69,11 +71,10 @@ namespace IRCSharp.Kernel.Bot
 
 		private void JoinChannels()
 		{
-			string line = null;
 			bool run = true;
+			string line = null;
 			while (run && (line = _clientReader.ReadLine()) != null)
 			{
-				
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
@@ -95,27 +96,28 @@ namespace IRCSharp.Kernel.Bot
 
 		private void StartListning()
 		{
-			bool run = true;
-			while (run)
+			string line = null;
+			while (_run && (line = _clientReader.ReadLine()) != null) //TODO needs proper way of shutting down, when run is set to false.
 			{
-				string line = null;
-				while (run && (line = _clientReader.ReadLine()) != null) //TODO needs proper way of shutting down, when run is set to false.
+				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
+				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
-					Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
-					if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
-					{
-						var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _clientWriter);
-						_messageServer.WriteMessage(query);
-						incomingThread.Start();
-					}
-					else
-					{
-						//error has happened
-					}
+					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _clientWriter);
+					_messageServer.WriteMessage(query);
+					incomingThread.Start();
+				}
+				else
+				{
+					//error has happened
 				}
 			}
 
-			Stop();
+			_messageServer.Stop();
+			_commandCollecter.Stop();
+			_client.Close();
+			_clientStream.Close();
+			_clientReader.Close();
+			_clientWriter.Close();
 		}
 	}
 }

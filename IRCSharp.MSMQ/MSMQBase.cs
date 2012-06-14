@@ -11,18 +11,10 @@ namespace IRCSharp.MSMQ
 		protected MessageQueue MessageQueue { get; private set; }
 		public string QueueName { get; private set; }
 
-		protected MSMQBase(string queuName)
+		protected MSMQBase(string queueName)
 		{
-			QueueName = queuName;
-			if (!System.Messaging.MessageQueue.Exists(QueueName))
-			{
-				MessageQueue = System.Messaging.MessageQueue.Create(QueueName);
-			}
-			else
-			{
-				MessageQueue = new System.Messaging.MessageQueue(QueueName);
-			}
-
+			QueueName = queueName;
+			MessageQueue = new System.Messaging.MessageQueue(QueueName);
 			MessageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
 		}
 
@@ -37,7 +29,6 @@ namespace IRCSharp.MSMQ
 
 		public void Dispose()
 		{
-			MessageQueue.Dispose();
 			this.Close();
 		}
 	}

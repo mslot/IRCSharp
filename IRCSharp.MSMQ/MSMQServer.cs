@@ -12,14 +12,21 @@ namespace IRCSharp.MSMQ
 	{
 		public MSMQReader<TReceive> Reader { get; private set; }
 		public event ReceiveCompletedHandler<TReceive> ReceiveCompleted;
+		public string QueueName { get; private set; }
 
 		public MSMQServer(string readerQueueName)
 		{
-			Reader = new MSMQReader<TReceive>(readerQueueName);
+			QueueName = readerQueueName;
+			Reader = new MSMQReader<TReceive>(QueueName);
 		}
 
 		public void Start()
 		{
+			if (!System.Messaging.MessageQueue.Exists(QueueName))
+			{
+				System.Messaging.MessageQueue.Create(QueueName);
+			}
+
 			Reader.ReceivedCompleted += OnReceiveCompleted;
 			Reader.BeginReceive();
 			Debug.WriteLine("ended thread");
@@ -48,6 +55,7 @@ namespace IRCSharp.MSMQ
 		public void CloseQueue()
 		{
 			Reader.Close();
+			System.Messaging.MessageQueue.Delete(QueueName);
 		}
 
 		public void Stop()

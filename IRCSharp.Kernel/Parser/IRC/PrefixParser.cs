@@ -19,7 +19,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 		{
 			_line = _context.Line;
 			int nextCharCount = 0;
-			if (_line.StartsWith(":")) //server sent us an message
+			if (_line != null && _line.StartsWith(":")) //server sent us an message
 			{
 				nextCharCount = ParsePrefixString(_line);
 			}

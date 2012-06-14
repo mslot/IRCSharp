@@ -16,8 +16,11 @@ namespace ConsoleRunner
 			string name = System.Configuration.ConfigurationManager.AppSettings["name"];
 			string channels = System.Configuration.ConfigurationManager.AppSettings["channels"];
 
-			var bot = new IRCSharp.Kernel.Bot.IRCBot(server,port,dllPath, username,name, channels);
+			var bot = new IRCSharp.Kernel.Bot.IRCBot(server, port, dllPath, username, name, channels);
 			bot.Start();
+			Console.WriteLine("Press a key to stop...");
+			Console.ReadKey();
+			bot.Stop();
 		}
 	}
 }
