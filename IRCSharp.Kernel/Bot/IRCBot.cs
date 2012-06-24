@@ -20,7 +20,6 @@ namespace IRCSharp.Kernel.Bot
 		private string _name;
 		private string _hostname;
 		private string _channels;
-		private volatile bool _run = true;
 
 		public IRCBot(string server, int port, string dllPath, string username, string name, string channels, string hostname = "rubber_duck_robert_bot@hell.org") : base("main_bot_thread")
 		{
@@ -56,7 +55,6 @@ namespace IRCSharp.Kernel.Bot
 
 		public void Stop()
 		{
-			_run = false;
 			_clientWriter.WriteLine("QUIT :goodbye");
 			_clientWriter.Flush();
 		}
@@ -97,7 +95,7 @@ namespace IRCSharp.Kernel.Bot
 		private void StartListning()
 		{
 			string line = null;
-			while (_run && (line = _clientReader.ReadLine()) != null) //TODO needs proper way of shutting down, when run is set to false.
+			while ((line = _clientReader.ReadLine()) != null)
 			{
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
