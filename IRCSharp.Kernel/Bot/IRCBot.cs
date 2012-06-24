@@ -97,7 +97,7 @@ namespace IRCSharp.Kernel.Bot
 				}
 				else
 				{
-					//error has happened
+					//TODO error has happened. Needs to find a proper way of handling this.
 				}
 			}
 		}
@@ -116,10 +116,11 @@ namespace IRCSharp.Kernel.Bot
 				}
 				else
 				{
-					//error has happened
+					//TODO error has happened. Needs to find a proper way of handling this.
 				}
 			}
 
+			//TODO refactor out in function
 			_messageServer.Stop();
 			_commandCollecter.Stop();
 			_client.Close();
