@@ -25,7 +25,7 @@ namespace IRCSharp.Kernel.Query
 			Parameter = String.Empty;
 		}
 
-		public string ToString()
+		public override string ToString()
 		{
 			return RawLine;
 		}
