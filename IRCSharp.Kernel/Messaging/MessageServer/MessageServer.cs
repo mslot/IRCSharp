@@ -5,25 +5,40 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Messaging.MessageServer
 {
+	public delegate void OutgoingEventHandler(Query.IRCCommandQuery query);
+
 	public class MessageServer<USend>
 	{
-		private MSMQ.MSMQServer<string, USend> _msmqServer = null;
+		private MSMQ.MSMQServer<string, USend> _connectionServer = null;
+		private MSMQ.MSMQServer<Query.IRCCommandQuery, Query.IRCCommandQuery> _outgoingServer = null;
 		private ICollection<string> _messageQueues = new LinkedList<string>();
+		public event OutgoingEventHandler OutgoingReveived;
 
-		public MessageServer(string receiveMessageQueueName)
+		public MessageServer(string connectorsQueueName, string outgoingQueueName)
 		{
-			_msmqServer = new MSMQ.MSMQServer<string, USend>(receiveMessageQueueName);
-			_msmqServer.ReceiveCompleted += new MSMQ.ReceiveCompletedHandler<string>(ReceiveCompleted);
+			_outgoingServer = new MSMQ.MSMQServer<Query.IRCCommandQuery, Query.IRCCommandQuery>(outgoingQueueName);
+			_outgoingServer.ReceiveCompleted += OutgoingServerReceiveCompleted;
+
+			_connectionServer = new MSMQ.MSMQServer<string, USend>(connectorsQueueName);
+			_connectionServer.ReceiveCompleted += ConnectorsReceiveCompleted;
 		}
 
-		public void WriteMessage(USend data)
+		public void OnOutgingReceived(Query.IRCCommandQuery query)
+		{
+			if (OutgoingReveived != null)
+			{
+				OutgoingReveived(query);
+			}
+		}
+
+		public void WriteMessageToConnectors(USend data)
 		{
 			List<string> queuesToRemove = new List<string>();
 			foreach (string queue in _messageQueues)
 			{
 				if (System.Messaging.MessageQueue.Exists(queue))
 				{
-					_msmqServer.WriteData(data, queue);
+					_connectionServer.WriteData(data, queue);
 				}
 				else
 				{
@@ -39,20 +54,27 @@ namespace IRCSharp.Kernel.Messaging.MessageServer
 
 		public void Start()
 		{
-			_msmqServer.Start();
+			_outgoingServer.Start();
+			_connectionServer.Start();
 		}
 
 		public void Stop()
 		{
-			_msmqServer.Stop();
+			_outgoingServer.Stop();
+			_connectionServer.Stop();
 		}
 
-		private void ReceiveCompleted(string data)
+		private void ConnectorsReceiveCompleted(string data)
 		{
 			if (!_messageQueues.Contains(data))
 			{
 				_messageQueues.Add(data);
 			}
+		}
+
+		private void OutgoingServerReceiveCompleted(Query.IRCCommandQuery data)
+		{
+			OnOutgingReceived(data);
 		}
 	}
 }

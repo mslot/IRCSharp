@@ -42,5 +42,12 @@ namespace IRCSharp.Kernel.Messaging.MessageClient
 		{
 			_msmqServer.WriteData(_receiveQueuePath, Configuration.MessageServerConfiguration.BotServerQueuePath);
 		}
+
+		public void WriteToBot(Query.IRCCommandQuery query)
+		{
+			MSMQ.MSMQWriter<Query.IRCCommandQuery> writer = new MSMQ.MSMQWriter<Query.IRCCommandQuery>(Configuration.MessageServerConfiguration.BotServerOutgoingPath);
+			writer.SendMessage(query);
+			writer.Close();
+		}
 	}
 }

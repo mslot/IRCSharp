@@ -24,5 +24,10 @@ namespace IRCSharp.Kernel.Query
 			Prefix = String.Empty;
 			Parameter = String.Empty;
 		}
+
+		public string ToString()
+		{
+			return RawLine;
+		}
 	}
 }
