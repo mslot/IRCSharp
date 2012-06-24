@@ -65,15 +65,15 @@ namespace IRCSharp.Kernel.Bot
 
 		public void Stop()
 		{
-			_clientWriter.WriteLine("QUIT :goodbye");
+			_clientWriter.WriteLine("QUIT :goodbye"); //TODO: put in writer class
 			_clientWriter.Flush();
 		}
 
 		private void JoinServer()
 		{
-			_clientWriter.WriteLine(String.Format("USER {0} {1} {2} :{3}", _username, _hostname, _server, _name)); //TODO maybe writer could be moved out in a class that wraps writing known commands
+			_clientWriter.WriteLine(String.Format("USER {0} {1} {2} :{3}", _username, _hostname, _server, _name)); //TODO: put in writer class
 			_clientWriter.Flush();
-			_clientWriter.WriteLine(String.Format("Nick {0}", _username));
+			_clientWriter.WriteLine(String.Format("Nick {0}", _username)); //TODO: put in writer class
 			_clientWriter.Flush();
 		}
 
@@ -90,7 +90,7 @@ namespace IRCSharp.Kernel.Bot
 					incomingThread.Start();
 					if (query.Command == Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Query.ResponseCommand.ERR_NOMOTD)
 					{
-						_clientWriter.WriteLine(String.Format("JOIN {0}", _channels));
+						_clientWriter.WriteLine(String.Format("JOIN {0}", _channels)); //TODO: put in writer class
 						_clientWriter.Flush();
 						run = false;
 					}
