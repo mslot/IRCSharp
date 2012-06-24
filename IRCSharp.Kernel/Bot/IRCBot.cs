@@ -9,7 +9,7 @@ namespace IRCSharp.Kernel.Bot
 	{
 		private System.IO.Stream _clientStream = null;
 		private System.Net.Sockets.TcpClient _client = null;
-		private System.IO.TextWriter _clientWriter = null;
+		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
 		private System.IO.TextReader _clientReader = null;
 		private Messaging.MessageServer.MessageServer<Query.IRCCommandQuery> _messageServer = null;
 		private IRCSharp.Kernel.Collecters.CommandCollecter _commandCollecter = null;
@@ -34,7 +34,7 @@ namespace IRCSharp.Kernel.Bot
 			_client = new System.Net.Sockets.TcpClient();
 			_client.Connect(_server, _port);
 			_clientStream = _client.GetStream();
-			_clientWriter = System.IO.StreamWriter.Synchronized(new System.IO.StreamWriter(_clientStream));
+			_ircWriter = new Query.Writer.IRCWriter<System.IO.Stream>(_clientStream);
 			_clientReader = new System.IO.StreamReader(_clientStream);
 			_messageServer = new Messaging.MessageServer.MessageServer<Query.IRCCommandQuery>(
 				Messaging.Configuration.MessageServerConfiguration.BotServerQueuePath, 
@@ -46,7 +46,7 @@ namespace IRCSharp.Kernel.Bot
 
 		void OutgoingReveived(Query.IRCCommandQuery query)
 		{
-			(new IRCSharp.Kernel.Threading.OutputThread(_clientWriter, query.ToString())).Start();
+			(new IRCSharp.Kernel.Threading.OutputThread(_ircWriter, query)).Start();
 		}
 
 		public override void Task()
@@ -65,16 +65,13 @@ namespace IRCSharp.Kernel.Bot
 
 		public void Stop()
 		{
-			_clientWriter.WriteLine("QUIT :goodbye"); //TODO: put in writer class
-			_clientWriter.Flush();
+			_ircWriter.Quit("goodbye");
 		}
 
 		private void JoinServer()
 		{
-			_clientWriter.WriteLine(String.Format("USER {0} {1} {2} :{3}", _username, _hostname, _server, _name)); //TODO: put in writer class
-			_clientWriter.Flush();
-			_clientWriter.WriteLine(String.Format("Nick {0}", _username)); //TODO: put in writer class
-			_clientWriter.Flush();
+			_ircWriter.User(_username, _hostname, _server, _name);
+			_ircWriter.Nick(_username);
 		}
 
 		private void JoinChannels()
@@ -86,12 +83,11 @@ namespace IRCSharp.Kernel.Bot
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
-					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _clientWriter);
+					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _ircWriter);
 					incomingThread.Start();
 					if (query.Command == Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Query.ResponseCommand.ERR_NOMOTD)
 					{
-						_clientWriter.WriteLine(String.Format("JOIN {0}", _channels)); //TODO: put in writer class
-						_clientWriter.Flush();
+						_ircWriter.Join(_channels);
 						run = false;
 					}
 				}
@@ -110,7 +106,7 @@ namespace IRCSharp.Kernel.Bot
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
-					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _clientWriter);
+					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _ircWriter);
 					_messageServer.WriteMessageToConnectors(query);
 					incomingThread.Start();
 				}
@@ -126,7 +122,7 @@ namespace IRCSharp.Kernel.Bot
 			_client.Close();
 			_clientStream.Close();
 			_clientReader.Close();
-			_clientWriter.Close();
+			_ircWriter.Close();
 		}
 	}
 }

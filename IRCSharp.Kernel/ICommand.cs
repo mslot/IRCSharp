@@ -8,6 +8,6 @@ namespace IRCSharp.Kernel
 	public interface ICommand<T,U> : IIdentifiable<T>
 	{
 		string Location { get; set; }
-		string Execute(U query);
+		Query.IRCCommandQuery Execute(U query);
 	}
 }

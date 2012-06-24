@@ -8,14 +8,14 @@ namespace IRCSharp.Kernel.Threading
 	public class IncomingThread : IRCSharp.Threading.Base.Thread
 	{
 		private IRCSharp.Kernel.Query.IRCCommandQuery _query = null;
-		private System.IO.TextWriter _textWriter = null;
+		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
 		private Manager.CommandManager _commandManager = null;
 
-		public IncomingThread(IRCSharp.Kernel.Query.IRCCommandQuery query, Manager.CommandManager commandManager, System.IO.TextWriter textWriter)
+		public IncomingThread(IRCSharp.Kernel.Query.IRCCommandQuery query, Manager.CommandManager commandManager, Query.Writer.IRCWriter<System.IO.Stream> ircWriter)
 			: base("incoming_thread")
 		{
 			_commandManager = commandManager;
-			_textWriter = textWriter;
+			_ircWriter = ircWriter;
 			_query = query;
 		}
 
@@ -28,8 +28,8 @@ namespace IRCSharp.Kernel.Threading
 			{
 				foreach (var command in ircCommands)
 				{
-					string ircCommandOutput = command.Execute(_query);
-					(new OutputThread(_textWriter, ircCommandOutput)).Start(); //TODO: Overkill??
+					Query.IRCCommandQuery ircCommandOutput = command.Execute(_query);
+					(new OutputThread(_ircWriter, ircCommandOutput)).Start(); //TODO: Overkill??
 				}
 			}
 
@@ -42,8 +42,8 @@ namespace IRCSharp.Kernel.Threading
 				{
 					foreach (var userdefinedCommand in userdefinedCommands)
 					{
-						string output = userdefinedCommand.Execute(userdefinedCommandQuery);
-						(new OutputThread(_textWriter, output)).Start(); //TODO: Overkill??
+						Query.IRCCommandQuery output = userdefinedCommand.Execute(userdefinedCommandQuery);
+						(new OutputThread(_ircWriter, output)).Start(); //TODO: Overkill??
 					}
 				}
 			}

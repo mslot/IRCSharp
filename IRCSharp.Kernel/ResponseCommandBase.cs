@@ -8,7 +8,7 @@ namespace IRCSharp.Kernel
 	public abstract class ResponseCommandBase : ICommand<IRCSharp.Kernel.Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>
 	{
 		public string Location { get; set; }
-		public abstract string Execute(IRCSharp.Kernel.Query.IRCCommandQuery query);
+		public abstract Query.IRCCommandQuery Execute(IRCSharp.Kernel.Query.IRCCommandQuery query);
 		public abstract Query.ResponseCommand Name {get;}
 	}
 }

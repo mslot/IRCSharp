@@ -7,14 +7,40 @@ namespace IRCSharp.MSMQTestProgram
 {
 	class Program
 	{
+		private static IRCSharp.Kernel.Messaging.MessageClient.MessageClient _client = new Kernel.Messaging.MessageClient.MessageClient("testProgram");
+
 		static void Main(string[] args)
 		{
-			IRCSharp.Kernel.Messaging.MessageClient.MessageClient client = new Kernel.Messaging.MessageClient.MessageClient("testProgram");
-			client.Start();
+			_client.ReceiveCompleted += ReceiveCompleted;
+			_client.Start();
 			Console.WriteLine("Press key to stop...");
 			Console.ReadKey();
-			client.Stop();
+			_client.Stop();
 			Console.WriteLine("stopped");
+		}
+
+		static void ReceiveCompleted(Kernel.Query.IRCCommandQuery query)
+		{
+			Console.WriteLine(":::::::::::::::::::::::::::::::::::::::Received");
+			Console.WriteLine(query.RawLine);
+
+			if (query.RawLine.Contains("gonggong"))
+			{
+				IRCSharp.Kernel.Query.IRCCommandQuery toBot = null;
+				if (IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse("PRIVMSG #mslot.dk :kingkong", out toBot))
+				{
+					Console.WriteLine("Trying to write to bot..." + query.RawLine);
+					_client.WriteToBot(toBot);
+				}
+				else
+				{
+					Console.WriteLine("failed");
+				}
+			}
+			else
+			{
+				Console.WriteLine("no gonggong");
+			}
 		}
 	}
 }

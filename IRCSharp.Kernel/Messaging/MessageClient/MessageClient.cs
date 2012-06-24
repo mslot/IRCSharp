@@ -5,11 +5,14 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Messaging.MessageClient
 {
+	public delegate void ReceiveCompletedEventHandler(Query.IRCCommandQuery query);
 	public class MessageClient
 	{
 		private MSMQ.MSMQServer<Query.IRCCommandQuery, string> _msmqServer = null;
 		private string _name;
 		private string _receiveQueuePath;
+
+		public event ReceiveCompletedEventHandler ReceiveCompleted;
 
 		public MessageClient(string name)
 		{
@@ -20,16 +23,16 @@ namespace IRCSharp.Kernel.Messaging.MessageClient
 
 		public void Start()
 		{
-			_msmqServer.ReceiveCompleted += ReceiveCompleted;
+			_msmqServer.ReceiveCompleted += InternaReceiveCompleted;
 			_msmqServer.Start();
 			Signup();
 		}
 
-		private void ReceiveCompleted(Query.IRCCommandQuery data)
+		public void OnReceiveCompleted(Query.IRCCommandQuery query)
 		{
-			if (data != null)
+			if (ReceiveCompleted != null)
 			{
-				Console.WriteLine(data.RawLine);
+				ReceiveCompleted(query);
 			}
 		}
 
@@ -49,5 +52,14 @@ namespace IRCSharp.Kernel.Messaging.MessageClient
 			writer.SendMessage(query);
 			writer.Close();
 		}
+
+		private void InternaReceiveCompleted(Query.IRCCommandQuery data)
+		{
+			if (data != null)
+			{
+				OnReceiveCompleted(data);
+			}
+		}
+
 	}
 }

@@ -7,20 +7,20 @@ namespace IRCSharp.Kernel.Threading
 {
 	public class OutputThread : IRCSharp.Threading.Base.Thread
 	{
-		private System.IO.TextWriter _textWriter = null;
-		private string _output = String.Empty;
+		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
+		private Query.IRCCommandQuery _query = null;
 
-		public OutputThread(System.IO.TextWriter textWriter, string output) : base("output_thread")
+		public OutputThread(Query.Writer.IRCWriter<System.IO.Stream> ircWriter, Query.IRCCommandQuery query)
+			: base("output_thread")
 		{
-			_textWriter = textWriter;
-			_output = output;
+			_ircWriter = ircWriter;
+			_query = query;
 		}
 
 		public override void Task()
 		{
 			base.Task();
-			_textWriter.WriteLine(_output);
-			_textWriter.Flush();
+			_ircWriter.WriteQuery(_query);
 		}
 	}
 }

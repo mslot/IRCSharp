@@ -119,6 +119,20 @@ namespace UnitTest.IRCParser
 		}
 
 		[Test]
+		public void RandomQueryTest()
+		{
+			string line = "PRIVMSG #mslot.dk :kingkong";
+			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
+
+			Assert.AreEqual("", query.Prefix);
+			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PRIVMSG, query.Command);
+			Assert.AreEqual("#mslot.dk :kingkong", query.Parameter);
+			Assert.True(parsed);
+
+		}
+
+		[Test]
 		public void QueryParseNUmericReply005()
 		{
 			string line = ":jubii.dk.quakenet.org 005 ro-bertbot MAXNICKLEN=15 TOPICLEN=250 AWAYLEN=160 KICKLEN=250 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDducCNMT CASEMAPPING=rfc1459 NETWORK=QuakeNet :are supported by this server";
