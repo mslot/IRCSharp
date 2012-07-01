@@ -17,7 +17,7 @@ namespace ConsoleRunner
 			string channels = System.Configuration.ConfigurationManager.AppSettings["channels"];
 
 			var bot = new IRCSharp.Kernel.Bot.IRCBot(server, port, dllPath, username, name, channels);
-			bot.Start();
+			bot.StartBot();
 			Console.WriteLine("Press a key to stop...");
 			Console.ReadKey();
 			bot.Stop();

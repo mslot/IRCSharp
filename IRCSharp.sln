@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.Threading", "IRCSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.MSMQTestProgram", "IRCSharp.MSMQTestProgram\IRCSharp.MSMQTestProgram.csproj", "{778FBE16-7F09-450D-BDF6-9CDDEA6F1176}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticManager", "StatisticManager\StatisticManager.csproj", "{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,16 @@ Global
 		{778FBE16-7F09-450D-BDF6-9CDDEA6F1176}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{778FBE16-7F09-450D-BDF6-9CDDEA6F1176}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{778FBE16-7F09-450D-BDF6-9CDDEA6F1176}.Release|x86.ActiveCfg = Release|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D20F122B-6773-4F66-A19E-91FBAD3D4D8B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -54,7 +54,7 @@ namespace IRCSharp.Kernel.Bot
 			StartBot();
 		}
 
-		private void StartBot()
+		public void StartBot()
 		{
 			_commandCollecter.Start();
 			_messageServer.Start();
@@ -80,6 +80,7 @@ namespace IRCSharp.Kernel.Bot
 			string line = null;
 			while (run && (line = _clientReader.ReadLine()) != null)
 			{
+				Console.WriteLine(line);
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
@@ -103,6 +104,7 @@ namespace IRCSharp.Kernel.Bot
 			string line = null;
 			while ((line = _clientReader.ReadLine()) != null)
 			{
+				Console.WriteLine(line);
 				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{

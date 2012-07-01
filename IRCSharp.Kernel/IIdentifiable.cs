@@ -7,6 +7,5 @@ namespace IRCSharp.Kernel
 {
     public interface IIdentifiable<T>
     {
-        T Name { get; }
     }
 }

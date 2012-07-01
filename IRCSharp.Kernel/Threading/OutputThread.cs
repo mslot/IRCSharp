@@ -20,7 +20,11 @@ namespace IRCSharp.Kernel.Threading
 		public override void Task()
 		{
 			base.Task();
-			_ircWriter.WriteQuery(_query);
+			
+			if (_query != null)
+			{
+				_ircWriter.WriteQuery(_query);
+			}
 		}
 	}
 }

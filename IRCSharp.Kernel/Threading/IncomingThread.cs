@@ -22,27 +22,32 @@ namespace IRCSharp.Kernel.Threading
 		//TODO: refactor this method and put logic of method out in seperate class.
 		public override void Task()
 		{
-			List<IRCSharp.Kernel.ICommand<Query.ResponseCommand, Query.IRCCommandQuery>> ircCommands = _commandManager.GetIRCCommand(_query.Command);
+			List<CommandInformation<Query.ResponseCommand>> ircCommandInformation = _commandManager.GetIRCCommand(_query.Command);
 
-			if (ircCommands != null)
+			if (ircCommandInformation != null)
 			{
-				foreach (var command in ircCommands)
+				foreach (var commandInformation in ircCommandInformation)
 				{
-					Query.IRCCommandQuery ircCommandOutput = command.Execute(_query);
-					(new OutputThread(_ircWriter, ircCommandOutput)).Start(); //TODO: Overkill??
+					ICommand<Query.ResponseCommand, Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Query.ResponseCommand, Query.IRCCommandQuery>>(commandInformation.CommandType);
+					if (command != null)
+					{
+						var query = command.Execute(_query);
+						(new OutputThread(_ircWriter, query)).Start(); //TODO: Overkill??
+					}
 				}
 			}
 
 			Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			if (Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(_query, out userdefinedCommandQuery))
 			{
-				List<IRCSharp.Kernel.ICommand<string, Query.UserdefinedCommandQuery>> userdefinedCommands = _commandManager.GetUserdefinedCommand(userdefinedCommandQuery.CommandName);
+				List<CommandInformation<string>> userdefinedInformationCommands = _commandManager.GetUserdefinedCommand(userdefinedCommandQuery.CommandName);
 
-				if (userdefinedCommands != null)
+				if (userdefinedInformationCommands != null)
 				{
-					foreach (var userdefinedCommand in userdefinedCommands)
+					foreach (var userdefinedCommandInformation in userdefinedInformationCommands)
 					{
-						Query.IRCCommandQuery output = userdefinedCommand.Execute(userdefinedCommandQuery);
+						ICommand<string, Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<string, Query.UserdefinedCommandQuery>>(userdefinedCommandInformation.CommandType);
+						Query.IRCCommandQuery output = command.Execute(userdefinedCommandQuery);
 						(new OutputThread(_ircWriter, output)).Start(); //TODO: Overkill??
 					}
 				}

@@ -24,6 +24,7 @@ namespace IRCSharp.Kernel.Query
 		RPL_MOTDSTART,
 		RPL_MOTD,
 		RPL_ENDOFMOTD,
-		ERR_NOMOTD
+		ERR_NOMOTD,
+		ALL //Represents all IRC commands
 	}
 }

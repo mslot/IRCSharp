@@ -5,6 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Manager.Commands
 {
+	[IRCCommandAttribute(Query.ResponseCommand.PING)]
 	public class PingCommand : ResponseCommandBase
 	{
 		public override Query.IRCCommandQuery Execute(IRCSharp.Kernel.Query.IRCCommandQuery query)
@@ -17,9 +18,8 @@ namespace IRCSharp.Kernel.Manager.Commands
 			return pongQuery;
 		}
 
-		public override IRCSharp.Kernel.Query.ResponseCommand Name
+		public override void Init()
 		{
-			get { return IRCSharp.Kernel.Query.ResponseCommand.PING; }
 		}
 	}
 }

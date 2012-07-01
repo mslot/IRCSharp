@@ -15,5 +15,7 @@ namespace IRCSharp.Kernel
 		{
 
 		}
+
+		public abstract void Init();
 	}
 }

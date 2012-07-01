@@ -9,5 +9,6 @@ namespace IRCSharp.Kernel
 	{
 		string Location { get; set; }
 		Query.IRCCommandQuery Execute(U query);
+		void Init();
 	}
 }

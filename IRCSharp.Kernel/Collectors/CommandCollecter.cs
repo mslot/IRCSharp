@@ -31,11 +31,31 @@ namespace IRCSharp.Kernel.Collecters
 		{
 			foreach (string absoluteFilePath in System.IO.Directory.GetFiles(directoryPath))
 			{
-				ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> newCommand = 
-					Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
-				newCommand.Location = absoluteFilePath;
+				Type commandType = null;
+				if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath))
+				{
+					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+					string name = Reflection.ReflectionUtil.GetUserdefinedName(directoryPath);
+					CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
 
-				CommandManager.InsertUserdefinedCommand(newCommand);
+					CommandManager.InsertUserdefinedCommand(information,name);
+
+					ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(commandType);
+					command.Init(); //TODO: Move this init out! This should not be the responsibility of the command collecter!!!
+				}
+				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath))
+				{
+					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath);
+					Query.ResponseCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
+					CommandInformation<Query.ResponseCommand> information = new CommandInformation<Query.ResponseCommand>(commandType, name, absoluteFilePath);
+
+					CommandManager.InsertIRCCommand(information, name);
+
+					ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(commandType);
+					command.Init(); //TODO: Move this init out! This should not be the responsibility of the command collecter!!!
+				}
+
+
 			}
 		}
 
@@ -44,26 +64,32 @@ namespace IRCSharp.Kernel.Collecters
 			_dllWatcher.Stop();
 		}
 
-		void _dllWatcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
+		private void _dllWatcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
 		{
-			ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(e.FullPath);
-			CommandManager.RemoveUserdefinedCommand(command.Name);
+			//TODO take action here. The dll is in fact not removed from the AppDomain. This can never be done.
 		}
 
-		void _dllWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
+		private void _dllWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
-			ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> newCommand = Reflection.ReflectionUtil.LoadTypeOfInterfaceFromAssembly<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(e.FullPath);
-			newCommand.Location = e.FullPath;
+			//TODO: should it be possible to insert IRC commands on the run? Why? Why not?
+			string absoluteFilePath = e.FullPath;
+			if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath))
+			{
+				Type commandType = Reflection.ReflectionUtil.GetTypeOf < ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+				string name = Reflection.ReflectionUtil.GetUserdefinedName(absoluteFilePath);
 
-			CommandManager.InsertUserdefinedCommand(newCommand);
+				CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
+
+				CommandManager.InsertUserdefinedCommand(information, name);
+			}
 		}
 
-		void _dllWatcher_Changed(object sender, System.IO.FileSystemEventArgs e)
+		private void _dllWatcher_Changed(object sender, System.IO.FileSystemEventArgs e)
 		{
 			//TODO: implement this
 		}
 
-		void _dllWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
+		private void _dllWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
 		{
 			//TODO: implement this
 		}

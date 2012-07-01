@@ -46,6 +46,8 @@
     <Compile Include="Bot\IRCBot.cs" />
     <Compile Include="Collections\SynchronizedCollection.cs" />
     <Compile Include="Collectors\CommandCollecter.cs" />
+    <Compile Include="IRCCommandAttribute.cs" />
+    <Compile Include="CommandInformation.cs" />
     <Compile Include="Messaging\Configuration\MessageServerConfiguration.cs" />
     <Compile Include="Messaging\MessageClient\MessageClient.cs" />
     <Compile Include="Messaging\MessageServer\MessageServer.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Query\UserdefinedCommandQuery.cs" />
     <Compile Include="Query\Writer\IRCWriter.cs" />
     <Compile Include="ResponseCommandBase.cs" />
+    <Compile Include="UserdefinedCommandAttribute.cs" />
     <Compile Include="UserdefinedCommandBase.cs" />
     <Compile Include="Commands\PingCommand.cs" />
     <Compile Include="ICommand.cs" />

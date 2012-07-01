@@ -12,12 +12,18 @@ namespace IRCSharp.Kernel.Manager
 	/// </summary>
 	public class CommandManager
 	{
-		private Collections.SynchronizedDictionary<string, List<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>> _userdefinedCommands = new Collections.SynchronizedDictionary<string, List<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>>();
-		private Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<ICommand<Kernel.Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>> _ircCommands = new Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>>();
+		private Collections.SynchronizedDictionary<string, List<CommandInformation<string>>> _userdefinedCommands = new Collections.SynchronizedDictionary<string, List<CommandInformation<string>>>(); //TODO refactor this to strong types.
+		private Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<CommandInformation<Query.ResponseCommand>>> _ircCommands = new Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<CommandInformation<Query.ResponseCommand>>>(); //TODO refactor this to strong types
+		private Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<CommandInformation<Query.ResponseCommand>>> _ircCommandsGlobal = new Collections.SynchronizedDictionary<Kernel.Query.ResponseCommand, List<CommandInformation<Query.ResponseCommand>>>(); //TODO refactor this to strong types
 
 		public CommandManager()
 		{
-			this.InsertIRCCommand(new IRCSharp.Kernel.Manager.Commands.PingCommand());
+			CommandInformation<Query.ResponseCommand> information = new CommandInformation<Query.ResponseCommand>(
+				typeof(IRCSharp.Kernel.Manager.Commands.PingCommand)
+				, Query.ResponseCommand.PING
+				, String.Empty); //TODO: this can be done prettier.
+
+			InsertIRCCommand(information, information.Name);
 		}
 
 		/// <summary>
@@ -34,20 +40,41 @@ namespace IRCSharp.Kernel.Manager
 		/// </summary>
 		/// <param name="name">Name of command to return.</param>
 		/// <returns>An object that implements ICommand interface.</returns>
-		public List<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>> GetUserdefinedCommand(string name)
+		public List<CommandInformation<string>> GetUserdefinedCommand(string name)
 		{
 			return _userdefinedCommands.TryGet(name);
 		}
 
-		public List<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>> GetIRCCommand(Kernel.Query.ResponseCommand type)
+		public List<CommandInformation<Query.ResponseCommand>> GetIRCCommand(Kernel.Query.ResponseCommand type)
 		{
-			return _ircCommands.TryGet(type);
+			var allGlobalCommands = _ircCommandsGlobal.GetUnsynchronizedDictionary();
+			var specificCommands = _ircCommands.TryGet(type);
+
+			var all = new List<CommandInformation<Query.ResponseCommand>>();
+
+			if (specificCommands!= null && specificCommands.Count > 0)
+			{
+				all.AddRange(specificCommands);
+			}
+
+			foreach (var kvp in allGlobalCommands)
+			{
+				all.AddRange(kvp.Value);
+			}
+
+			return all;
 		}
 
-		public void InsertIRCCommand(ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery> command)
+		public void InsertIRCCommand(CommandInformation<Query.ResponseCommand> command, Query.ResponseCommand name)
 		{
-			_ircCommands.TryInsert(command.Name, new List<ICommand<Query.ResponseCommand,Query.IRCCommandQuery>>());
-			_ircCommands[command.Name].Add(command);
+			_ircCommands.TryInsert(name, new List<CommandInformation<Query.ResponseCommand>>());
+			_ircCommands[name].Add(command);
+
+			if (name == Query.ResponseCommand.ALL)
+			{
+				_ircCommandsGlobal.TryInsert(name, new List<CommandInformation<Query.ResponseCommand>>());
+				_ircCommandsGlobal[name].Add(command);
+			}
 		}
 
 		/// <summary>
@@ -55,10 +82,10 @@ namespace IRCSharp.Kernel.Manager
 		/// is inserted. The command is identified by the name of the command.
 		/// </summary>
 		/// <param name="command">The command to be inserted.</param>
-		public void InsertUserdefinedCommand(ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> command)
+		public void InsertUserdefinedCommand(CommandInformation<string> command, string name)
 		{
-			_userdefinedCommands.TryInsert(command.Name, new List<ICommand<string, Query.UserdefinedCommandQuery>>());
-			_userdefinedCommands[command.Name].Add(command);
+			_userdefinedCommands.TryInsert(name, new List<CommandInformation<string>>());
+			_userdefinedCommands[name].Add(command);
 		}
 	}
 }
