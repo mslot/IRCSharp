@@ -15,7 +15,6 @@ This is an beta (second beta) release. So there is many UNKNOWN bugs. Be aware t
 
 Tested
 ------
-
 I have written some unit tests to support the two parsers. I have only tests the minimum required so I can get the bot up and running. If bugs is detected, let me know and I will patch the bot and update the tests.
 The bot is only tested on Quakenet.
 
@@ -23,7 +22,7 @@ The MessageQueue has NOT been tested enough yet, so this part is still pretty al
 
 Next up
 -------
-I am pretty settled on that the bot contains the basic features that I want. I have refactored some code, from the first beta to the second beta, but not added more features to it. The next thing up is code cleaning, removing all those TODO's. I am also in the process of writing some good basic tutorials on how to extend the bot.
+I think that the bot, for now, is feature complete. It has all the features that I want, so now it all comes down to refactoring. I have refactored some code, from the first beta to the second beta, but not added more features to it. The next thing up is code cleaning, removing all those TODO's. I am also in the process of writing some good basic tutorials on how to extend the bot.
 
 License
 -------
