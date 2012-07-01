@@ -8,7 +8,7 @@ See [Quick start guide](https://bitbucket.org/msl0t/ircsharp/wiki/Home). This re
 
 Known bugs
 ----------
-This is an alpha release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
+This is an beta (second beta) release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
 
 + Netsplits
 + Mass querying the bot (and flooding the channel)
@@ -20,6 +20,10 @@ I have written some unit tests to support the two parsers. I have only tests the
 The bot is only tested on Quakenet.
 
 The MessageQueue has NOT been tested enough yet, so this part is still pretty alpha. More to come on this.
+
+Next up
+-------
+I am pretty settled on that the bot contains the basic features that I want. I have refactored some code, from the first beta to the second beta, but not added more features to it. The next thing up is code cleaning, removing all those TODO's. I am also in the process of writing some good basic tutorials on how to extend the bot.
 
 License
 -------
