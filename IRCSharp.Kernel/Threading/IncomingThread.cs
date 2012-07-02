@@ -19,40 +19,21 @@ namespace IRCSharp.Kernel.Threading
 			_query = query;
 		}
 
-		//TODO: refactor this method and put logic of method out in seperate class.
 		public override void Task()
 		{
-			List<CommandInformation<Query.ResponseCommand>> ircCommandInformation = _commandManager.GetIRCCommand(_query.Command);
+			var ircResults = _commandManager.FireIRCCommand(_query);
 
-			if (ircCommandInformation != null)
+			foreach (var result in ircResults)
 			{
-				foreach (var commandInformation in ircCommandInformation)
-				{
-					ICommand<Query.ResponseCommand, Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Query.ResponseCommand, Query.IRCCommandQuery>>(commandInformation.CommandType);
-					if (command != null)
-					{
-						var query = command.Execute(_query);
-						(new OutputThread(_ircWriter, query)).Start(); //TODO: Overkill??
-					}
-				}
+				(new OutputThread(_ircWriter, result)).Start();
 			}
 
-			Query.UserdefinedCommandQuery userdefinedCommandQuery;
-			if (Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(_query, out userdefinedCommandQuery))
+			var userdefinedResults = _commandManager.FireUserdefinedCommand(_query);
+
+			foreach (var results in userdefinedResults)
 			{
-				List<CommandInformation<string>> userdefinedInformationCommands = _commandManager.GetUserdefinedCommand(userdefinedCommandQuery.CommandName);
-
-				if (userdefinedInformationCommands != null)
-				{
-					foreach (var userdefinedCommandInformation in userdefinedInformationCommands)
-					{
-						ICommand<string, Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<string, Query.UserdefinedCommandQuery>>(userdefinedCommandInformation.CommandType);
-						Query.IRCCommandQuery output = command.Execute(userdefinedCommandQuery);
-						(new OutputThread(_ircWriter, output)).Start(); //TODO: Overkill??
-					}
-				}
+				(new OutputThread(_ircWriter, results)).Start();
 			}
-
 		}
 	}
 }

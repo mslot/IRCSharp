@@ -63,7 +63,7 @@ namespace IRCSharp.Kernel.Bot
 			StartListning();
 		}
 
-		public void Stop()
+		public void StopBot()
 		{
 			_ircWriter.Quit("goodbye");
 		}
@@ -118,7 +118,6 @@ namespace IRCSharp.Kernel.Bot
 				}
 			}
 
-			//TODO refactor out in function
 			_messageServer.Stop();
 			_commandCollecter.Stop();
 			_client.Close();

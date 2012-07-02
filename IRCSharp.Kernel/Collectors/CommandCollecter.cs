@@ -36,23 +36,15 @@ namespace IRCSharp.Kernel.Collecters
 				{
 					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
 					string name = Reflection.ReflectionUtil.GetUserdefinedName(directoryPath);
-					CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
 
-					CommandManager.InsertUserdefinedCommand(information,name);
-
-					ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(commandType);
-					command.Init(); //TODO: Move this init out! This should not be the responsibility of the command collecter!!!
+					CommandManager.InsertUserdefinedCommand(commandType,name, absoluteFilePath);
 				}
 				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath))
 				{
 					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath);
 					Query.ResponseCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
-					CommandInformation<Query.ResponseCommand> information = new CommandInformation<Query.ResponseCommand>(commandType, name, absoluteFilePath);
 
-					CommandManager.InsertIRCCommand(information, name);
-
-					ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(commandType);
-					command.Init(); //TODO: Move this init out! This should not be the responsibility of the command collecter!!!
+					CommandManager.InsertIRCCommand(commandType, name, absoluteFilePath);
 				}
 
 
@@ -80,7 +72,7 @@ namespace IRCSharp.Kernel.Collecters
 
 				CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
 
-				CommandManager.InsertUserdefinedCommand(information, name);
+				CommandManager.InsertUserdefinedCommand(information);
 			}
 		}
 

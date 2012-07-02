@@ -5,8 +5,6 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 {
-	//query to parse:
-	//:mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!command arg1 arg2 arg3
 	public class UserdefinedCommandParser
 	{
 		private UserdefinedCommandParser()

@@ -44,7 +44,9 @@
     <Compile Include="Activation\CommandActivator.cs" />
     <Compile Include="Activation\ICommandActivator.cs" />
     <Compile Include="Bot\IRCBot.cs" />
-    <Compile Include="Collections\SynchronizedCollection.cs" />
+    <Compile Include="Collections\IRCCommandCollection.cs" />
+    <Compile Include="Collections\SynchronizedDictionary.cs" />
+    <Compile Include="Collections\UserdefinedCommandCollection.cs" />
     <Compile Include="Collectors\CommandCollecter.cs" />
     <Compile Include="IRCCommandAttribute.cs" />
     <Compile Include="CommandInformation.cs" />

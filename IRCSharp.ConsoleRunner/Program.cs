@@ -20,7 +20,7 @@ namespace ConsoleRunner
 			bot.StartBot();
 			Console.WriteLine("Press a key to stop...");
 			Console.ReadKey();
-			bot.Stop();
+			bot.StopBot();
 		}
 	}
 }

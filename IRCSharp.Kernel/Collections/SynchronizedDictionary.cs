@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Collections
+namespace IRCSharp.Kernel.Collections
 {
 	/// <summary>
 	/// A synchronized dictionary class.
@@ -11,7 +11,7 @@ namespace IRCSharp.Collections
 	/// Maybe an enumerator will be made in the future.
 	/// </summary>
 	/// <typeparam name="T">Type that is going to be kept.</typeparam>
-	public sealed class SynchronizedDictionary<U, T> : IEnumerable<KeyValuePair<U, T>>
+	public class SynchronizedDictionary<U, T> : IEnumerable<KeyValuePair<U, T>>
 	{
 		private System.Threading.ReaderWriterLockSlim _lock = new System.Threading.ReaderWriterLockSlim();
 		private IDictionary<U, T> _collection = null;

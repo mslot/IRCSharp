@@ -61,7 +61,7 @@ namespace IRCSharp.Reflection
 								   .Select(attribute => ((IRCSharp.Kernel.IRCCommandAttribute)attribute).Name)
 								   .FirstOrDefault();
 
-					break; //TODO: correct this. Ugly and unreadable way of ending a loop.
+					break;
 				}
 			}
 
