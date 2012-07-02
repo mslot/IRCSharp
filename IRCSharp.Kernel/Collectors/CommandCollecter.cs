@@ -37,7 +37,7 @@ namespace IRCSharp.Kernel.Collecters
 					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
 					string name = Reflection.ReflectionUtil.GetUserdefinedName(directoryPath);
 
-					CommandManager.InsertUserdefinedCommand(commandType,name, absoluteFilePath);
+					CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);
 				}
 				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath))
 				{
@@ -63,16 +63,13 @@ namespace IRCSharp.Kernel.Collecters
 
 		private void _dllWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
-			//TODO: should it be possible to insert IRC commands on the run? Why? Why not?
 			string absoluteFilePath = e.FullPath;
 			if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath))
 			{
-				Type commandType = Reflection.ReflectionUtil.GetTypeOf < ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+				Type commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
 				string name = Reflection.ReflectionUtil.GetUserdefinedName(absoluteFilePath);
 
-				CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
-
-				CommandManager.InsertUserdefinedCommand(information);
+				CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);
 			}
 		}
 
