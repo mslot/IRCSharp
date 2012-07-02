@@ -115,7 +115,11 @@ namespace IRCSharp.Kernel.Manager
 					{
 						ICommand<string, Query.UserdefinedCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<string, Query.UserdefinedCommandQuery>>(userdefinedCommandInformation.CommandType);
 						Query.IRCCommandQuery output = command.Execute(userdefinedCommandQuery);
-						results.Add(output);
+
+						if (output != null)
+						{
+							results.Add(output);
+						}
 					}
 				}
 			}
@@ -137,7 +141,11 @@ namespace IRCSharp.Kernel.Manager
 					if (command != null)
 					{
 						var queryResult = command.Execute(query);
-						results.Add(queryResult);
+
+						if (queryResult != null)
+						{ 
+							results.Add(queryResult); 
+						}
 					}
 				}
 			}
