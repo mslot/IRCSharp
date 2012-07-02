@@ -18,12 +18,9 @@ namespace IRCSharp.Kernel.Manager
 
 		public CommandManager()
 		{
-			CommandInformation<Query.ResponseCommand> information = new CommandInformation<Query.ResponseCommand>(
-				typeof(IRCSharp.Kernel.Manager.Commands.PingCommand)
-				, Query.ResponseCommand.PING
-				, String.Empty); //TODO: this can be done prettier.
-
-			InsertIRCCommand(information);
+			InsertIRCCommand(typeof(IRCSharp.Kernel.Manager.Commands.PingCommand), 
+				Query.ResponseCommand.PING, 
+				String.Empty);
 		}
 
 		/// <summary>
@@ -143,8 +140,8 @@ namespace IRCSharp.Kernel.Manager
 						var queryResult = command.Execute(query);
 
 						if (queryResult != null)
-						{ 
-							results.Add(queryResult); 
+						{
+							results.Add(queryResult);
 						}
 					}
 				}
