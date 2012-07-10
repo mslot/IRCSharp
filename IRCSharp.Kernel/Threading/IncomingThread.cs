@@ -7,11 +7,11 @@ namespace IRCSharp.Kernel.Threading
 {
 	public class IncomingThread : IRCSharp.Threading.Base.Thread
 	{
-		private IRCSharp.Kernel.Query.IRCCommandQuery _query = null;
-		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
+		private IRCSharp.Kernel.Model.Query.IRCCommandQuery _query = null;
+		private Model.Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
 		private Manager.CommandManager _commandManager = null;
 
-		public IncomingThread(IRCSharp.Kernel.Query.IRCCommandQuery query, Manager.CommandManager commandManager, Query.Writer.IRCWriter<System.IO.Stream> ircWriter)
+		public IncomingThread(IRCSharp.Kernel.Model.Query.IRCCommandQuery query, Manager.CommandManager commandManager, Model.Query.Writer.IRCWriter<System.IO.Stream> ircWriter)
 			: base("incoming_thread")
 		{
 			_commandManager = commandManager;

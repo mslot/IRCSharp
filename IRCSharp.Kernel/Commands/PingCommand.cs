@@ -5,13 +5,13 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Manager.Commands
 {
-	[IRCCommandAttribute(Query.ResponseCommand.PING)]
+	[IRCCommandAttribute(Model.Query.ResponseCommand.PING)]
 	public class PingCommand : ResponseCommandBase
 	{
-		public override Query.IRCCommandQuery Execute(IRCSharp.Kernel.Query.IRCCommandQuery query)
+		public override Model.Query.IRCCommandQuery Execute(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
 		{
 			string[] commands = query.Parameter.Split(':');
-			Query.IRCCommandQuery pongQuery = null;
+			Model.Query.IRCCommandQuery pongQuery = null;
 
 			Parser.IRC.IRCQueryParser.TryParse("PONG " + commands[1], out pongQuery);
 

@@ -8,9 +8,9 @@ namespace IRCSharp.Kernel
 	[AttributeUsage(AttributeTargets.Class)]
 	public class IRCCommandAttribute : Attribute
 	{
-		public IRCSharp.Kernel.Query.ResponseCommand Name { get; private set; }
+		public IRCSharp.Kernel.Model.Query.ResponseCommand Name { get; private set; }
 
-		public IRCCommandAttribute(IRCSharp.Kernel.Query.ResponseCommand name)
+		public IRCCommandAttribute(IRCSharp.Kernel.Model.Query.ResponseCommand name)
 		{
 			Name = name;
 		}

@@ -9,7 +9,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 	{
 		public IParsable CurrentState { get; set; }
 		public String Line { get; set; }
-		public Query.IRCCommandQuery Query { get; set; }
+		public Model.Query.IRCCommandQuery Query { get; set; }
 		public int CharCount { get; set; }
 	}
 }

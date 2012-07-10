@@ -9,9 +9,9 @@ namespace IRCSharp.Kernel.Bot
 	{
 		private System.IO.Stream _clientStream = null;
 		private System.Net.Sockets.TcpClient _client = null;
-		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
+		private Model.Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
 		private System.IO.TextReader _clientReader = null;
-		private Messaging.MessageServer.MessageServer<Query.IRCCommandQuery> _messageServer = null;
+		private Messaging.MessageServer.MessageServer<Model.Query.IRCCommandQuery> _messageServer = null;
 		private IRCSharp.Kernel.Collecters.CommandCollecter _commandCollecter = null;
 		private int _port;
 		private string _server;
@@ -34,9 +34,9 @@ namespace IRCSharp.Kernel.Bot
 			_client = new System.Net.Sockets.TcpClient();
 			_client.Connect(_server, _port);
 			_clientStream = _client.GetStream();
-			_ircWriter = new Query.Writer.IRCWriter<System.IO.Stream>(_clientStream);
+			_ircWriter = new Model.Query.Writer.IRCWriter<System.IO.Stream>(_clientStream);
 			_clientReader = new System.IO.StreamReader(_clientStream);
-			_messageServer = new Messaging.MessageServer.MessageServer<Query.IRCCommandQuery>(
+			_messageServer = new Messaging.MessageServer.MessageServer<Model.Query.IRCCommandQuery>(
 				Messaging.Configuration.MessageServerConfiguration.BotServerQueuePath, 
 				Messaging.Configuration.MessageServerConfiguration.BotServerOutgoingPath
 				);
@@ -44,7 +44,7 @@ namespace IRCSharp.Kernel.Bot
 			_messageServer.OutgoingReveived += OutgoingReveived;
 		}
 
-		void OutgoingReveived(Query.IRCCommandQuery query)
+		void OutgoingReveived(Model.Query.IRCCommandQuery query)
 		{
 			(new IRCSharp.Kernel.Threading.OutputThread(_ircWriter, query)).Start();
 		}
@@ -81,12 +81,12 @@ namespace IRCSharp.Kernel.Bot
 			while (run && (line = _clientReader.ReadLine()) != null)
 			{
 				Console.WriteLine(line);
-				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
+				Model.Query.IRCCommandQuery query = new Model.Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
 					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _ircWriter);
 					incomingThread.Start();
-					if (query.Command == Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Query.ResponseCommand.ERR_NOMOTD)
+					if (query.Command == Model.Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Model.Query.ResponseCommand.ERR_NOMOTD)
 					{
 						_ircWriter.Join(_channels);
 						run = false;
@@ -105,7 +105,7 @@ namespace IRCSharp.Kernel.Bot
 			while ((line = _clientReader.ReadLine()) != null)
 			{
 				Console.WriteLine(line);
-				Query.IRCCommandQuery query = new Query.IRCCommandQuery(line);
+				Model.Query.IRCCommandQuery query = new Model.Query.IRCCommandQuery(line);
 				if (Parser.IRC.IRCQueryParser.TryParse(line, out query))
 				{
 					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _ircWriter);

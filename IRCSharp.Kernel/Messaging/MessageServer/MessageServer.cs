@@ -5,25 +5,25 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Messaging.MessageServer
 {
-	public delegate void OutgoingEventHandler(Query.IRCCommandQuery query);
+	public delegate void OutgoingEventHandler(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);
 
 	public class MessageServer<USend>
 	{
 		private MSMQ.MSMQServer<string, USend> _connectionServer = null;
-		private MSMQ.MSMQServer<Query.IRCCommandQuery, Query.IRCCommandQuery> _outgoingServer = null;
+		private MSMQ.MSMQServer<IRCSharp.Kernel.Model.Query.IRCCommandQuery, IRCSharp.Kernel.Model.Query.IRCCommandQuery> _outgoingServer = null;
 		private ICollection<string> _messageQueues = new LinkedList<string>();
 		public event OutgoingEventHandler OutgoingReveived;
 
 		public MessageServer(string connectorsQueueName, string outgoingQueueName)
 		{
-			_outgoingServer = new MSMQ.MSMQServer<Query.IRCCommandQuery, Query.IRCCommandQuery>(outgoingQueueName);
+			_outgoingServer = new MSMQ.MSMQServer<IRCSharp.Kernel.Model.Query.IRCCommandQuery, IRCSharp.Kernel.Model.Query.IRCCommandQuery>(outgoingQueueName);
 			_outgoingServer.ReceiveCompleted += OutgoingServerReceiveCompleted;
 
 			_connectionServer = new MSMQ.MSMQServer<string, USend>(connectorsQueueName);
 			_connectionServer.ReceiveCompleted += ConnectorsReceiveCompleted;
 		}
 
-		public void OnOutgingReceived(Query.IRCCommandQuery query)
+		public void OnOutgingReceived(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
 		{
 			if (OutgoingReveived != null)
 			{
@@ -72,7 +72,7 @@ namespace IRCSharp.Kernel.Messaging.MessageServer
 			}
 		}
 
-		private void OutgoingServerReceiveCompleted(Query.IRCCommandQuery data)
+		private void OutgoingServerReceiveCompleted(IRCSharp.Kernel.Model.Query.IRCCommandQuery data)
 		{
 			OnOutgingReceived(data);
 		}

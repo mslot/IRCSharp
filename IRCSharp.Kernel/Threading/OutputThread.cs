@@ -7,10 +7,10 @@ namespace IRCSharp.Kernel.Threading
 {
 	public class OutputThread : IRCSharp.Threading.Base.Thread
 	{
-		private Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
-		private Query.IRCCommandQuery _query = null;
+		private Model.Query.Writer.IRCWriter<System.IO.Stream> _ircWriter = null;
+		private Model.Query.IRCCommandQuery _query = null;
 
-		public OutputThread(Query.Writer.IRCWriter<System.IO.Stream> ircWriter, Query.IRCCommandQuery query)
+		public OutputThread(Model.Query.Writer.IRCWriter<System.IO.Stream> ircWriter, Model.Query.IRCCommandQuery query)
 			: base("output_thread")
 		{
 			_ircWriter = ircWriter;

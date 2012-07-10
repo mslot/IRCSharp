@@ -12,18 +12,18 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 
 		}
 
-		public static bool TryParse(IRCSharp.Kernel.Query.IRCCommandQuery ircQuery, out IRCSharp.Kernel.Query.UserdefinedCommandQuery userdefinedCommandQuery)
+		public static bool TryParse(IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery, out IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery)
 		{
 			UserdefinedCommandParser parser = new UserdefinedCommandParser();
 			bool parsed = false;
-			Query.UserdefinedCommandQuery query = null;
-			if (ircQuery.Command == Query.ResponseCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))
+			Model.Query.UserdefinedCommandQuery query = null;
+			if (ircQuery.Command == Model.Query.ResponseCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))
 			{
 				string to = parser.ParseTo(ircQuery.Parameter);
 				string from = parser.ParseFrom(ircQuery.Prefix);
 				string commandName = parser.ParseCommandName(ircQuery.Parameter);
 				IList<string> commandNameParameters = parser.ParseCommandParameters(ircQuery.Parameter);
-				query = new Query.UserdefinedCommandQuery(to, from, commandName, ircQuery);
+				query = new Model.Query.UserdefinedCommandQuery(to, from, commandName, ircQuery);
 				query.AddParameters(commandNameParameters);
 				parsed = true;
 			}

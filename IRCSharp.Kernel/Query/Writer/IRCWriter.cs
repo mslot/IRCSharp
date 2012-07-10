@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Kernel.Query.Writer
+namespace IRCSharp.Kernel.Model.Query.Writer
 {
 	public class IRCWriter<TStream> where TStream : System.IO.Stream
 	{

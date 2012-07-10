@@ -32,17 +32,17 @@ namespace IRCSharp.Kernel.Collecters
 			foreach (string absoluteFilePath in System.IO.Directory.GetFiles(directoryPath))
 			{
 				Type commandType = null;
-				if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath))
+				if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath))
 				{
-					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath);
 					string name = Reflection.ReflectionUtil.GetUserdefinedName(directoryPath);
 
 					CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);
 				}
-				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath))
+				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath))
 				{
-					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Query.ResponseCommand, IRCSharp.Kernel.Query.IRCCommandQuery>>(absoluteFilePath);
-					Query.ResponseCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
+					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath);
+					Model.Query.ResponseCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
 
 					CommandManager.InsertIRCCommand(commandType, name, absoluteFilePath);
 				}
@@ -64,9 +64,9 @@ namespace IRCSharp.Kernel.Collecters
 		private void _dllWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
 			string absoluteFilePath = e.FullPath;
-			if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath))
+			if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath))
 			{
-				Type commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>>(absoluteFilePath);
+				Type commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath);
 				string name = Reflection.ReflectionUtil.GetUserdefinedName(absoluteFilePath);
 
 				CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);

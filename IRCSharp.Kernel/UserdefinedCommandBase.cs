@@ -5,9 +5,9 @@ using System.Text;
 
 namespace IRCSharp.Kernel
 {
-	public abstract class UserdefinedCommandBase : ICommand<string, IRCSharp.Kernel.Query.UserdefinedCommandQuery>
+	public abstract class UserdefinedCommandBase : ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>
 	{
-		public abstract Query.IRCCommandQuery Execute(IRCSharp.Kernel.Query.UserdefinedCommandQuery query);
+		public abstract Model.Query.IRCCommandQuery Execute(IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery query);
 		public abstract string Name { get; }
 		public string Location { get; set; }
 

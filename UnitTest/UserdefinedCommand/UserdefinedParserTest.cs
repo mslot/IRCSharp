@@ -14,12 +14,12 @@ namespace UnitTest.UserdefinedCommand
 		public void QueryParseTestParsingUserdefinedCommand()
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!command arg1 arg2 arg3";
-			IRCSharp.Kernel.Query.IRCCommandQuery ircQuery = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
 			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
 
 			Assert.True(parsedIRCQuery);
 
-			IRCSharp.Kernel.Query.UserdefinedCommandQuery userdefinedCommandQuery;
+			IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			bool parsedUserdefinedCommand = IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(ircQuery, out userdefinedCommandQuery);
 
 			Assert.NotNull(userdefinedCommandQuery);
@@ -37,12 +37,12 @@ namespace UnitTest.UserdefinedCommand
 		public void QueryParseTestParsingUserdefinedCommandNoParams()
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!hello";
-			IRCSharp.Kernel.Query.IRCCommandQuery ircQuery = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
 			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
 
 			Assert.True(parsedIRCQuery);
 
-			IRCSharp.Kernel.Query.UserdefinedCommandQuery userdefinedCommandQuery;
+			IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			bool parsedUserdefinedCommand = IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(ircQuery, out userdefinedCommandQuery);
 
 			Assert.NotNull(userdefinedCommandQuery);

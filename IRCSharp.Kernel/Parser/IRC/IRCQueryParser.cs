@@ -15,11 +15,11 @@ namespace IRCSharp.Kernel.Parser.IRC
 			Context.CurrentState = new PrefixParser(Context);
 		}
 
-		public static bool TryParse(string line, out Query.IRCCommandQuery query)
+		public static bool TryParse(string line, out Model.Query.IRCCommandQuery query)
 		{
 			var instance = new IRCQueryParser();
 			instance.Context.Line = line;
-			instance.Context.Query = new Query.IRCCommandQuery(line);
+			instance.Context.Query = new Model.Query.IRCCommandQuery(line);
 			instance.Context.Query = query = instance.Parse();
 			bool errorProcessing = (instance.Context.CharCount != -1);
 			bool errorReachingEnd = (instance.Context.CharCount == instance.Context.Line.Length);
@@ -27,7 +27,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 			return errorProcessing && errorReachingEnd;
 		}
 
-		private Query.IRCCommandQuery Parse()
+		private Model.Query.IRCCommandQuery Parse()
 		{
 			while ((Context.CharCount != -1) && ((Context.CharCount = Context.CurrentState.Parse()) != Context.Line.Length)) ;
 

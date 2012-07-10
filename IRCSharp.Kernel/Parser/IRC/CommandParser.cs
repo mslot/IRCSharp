@@ -26,7 +26,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 
 		private int ParseResponseCommand(string line)
 		{
-			Query.ResponseCommand responseCommand = Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Model.Query.ResponseCommand responseCommand = Model.Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
 			int nextCharCount = -1;
 			if (!String.IsNullOrEmpty(line))
 			{
@@ -55,20 +55,20 @@ namespace IRCSharp.Kernel.Parser.IRC
 			}
 		}
 
-		private Query.ResponseCommand DetermineResponseCommand(string command)
+		private Model.Query.ResponseCommand DetermineResponseCommand(string command)
 		{
-			Query.ResponseCommand message = default(Query.ResponseCommand);
+			Model.Query.ResponseCommand message = default(Model.Query.ResponseCommand);
 			switch (command)
 			{
-				case "422": message = Query.ResponseCommand.ERR_NOMOTD; break;
-				case "375": message = Query.ResponseCommand.RPL_MOTDSTART; break;
-				case "372": message = Query.ResponseCommand.RPL_MOTD; break;
-				case "376": message = Query.ResponseCommand.RPL_ENDOFMOTD; break;
-				case "221": message = Query.ResponseCommand.RPL_UMODEIS; break;
-				case "005": message = Query.ResponseCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
-				case "PRIVMSG": message = Query.ResponseCommand.PRIVMSG; break;
-				case "PING": message = Query.ResponseCommand.PING; break;
-				case "JOIN": message = Query.ResponseCommand.JOIN; break;
+				case "422": message = Model.Query.ResponseCommand.ERR_NOMOTD; break;
+				case "375": message = Model.Query.ResponseCommand.RPL_MOTDSTART; break;
+				case "372": message = Model.Query.ResponseCommand.RPL_MOTD; break;
+				case "376": message = Model.Query.ResponseCommand.RPL_ENDOFMOTD; break;
+				case "221": message = Model.Query.ResponseCommand.RPL_UMODEIS; break;
+				case "005": message = Model.Query.ResponseCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
+				case "PRIVMSG": message = Model.Query.ResponseCommand.PRIVMSG; break;
+				case "PING": message = Model.Query.ResponseCommand.PING; break;
+				case "JOIN": message = Model.Query.ResponseCommand.JOIN; break;
 			}
 
 			return message;

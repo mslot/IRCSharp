@@ -26,11 +26,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithOneTargetAndTrailngParams()
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!command arg1 arg2 arg3";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk",query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PRIVMSG, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PRIVMSG, query.Command);
 			Assert.AreEqual("#mslot.dk :!command arg1 arg2 arg3", query.Parameter);
 			Assert.True(parsed);
 
@@ -40,11 +40,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithOneTargetAndNoTrailing()
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PRIVMSG, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PRIVMSG, query.Command);
 			Assert.AreEqual("#mslot.dk :", query.Parameter);
 			Assert.True(parsed);
 		}
@@ -53,10 +53,10 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithNoPreifxAndNoTrailing()
 		{
 			string line = "PING :123234";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PING, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PING, query.Command);
 			Assert.AreEqual(":123234", query.Parameter);
 			Assert.True(parsed);
 
@@ -66,11 +66,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithNoPreifxAndNoTrailingPONG()
 		{
 			string line = ":hej@med.dig PING 123234";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("hej@med.dig", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PING, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PING, query.Command);
 			Assert.AreEqual("123234", query.Parameter);
 			Assert.True(parsed);
 
@@ -80,11 +80,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithJoin()
 		{
 			string line = ":WiZ JOIN #Twilight_zone";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("WiZ", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.JOIN, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.JOIN, query.Command);
 			Assert.AreEqual("#Twilight_zone", query.Parameter);
 			Assert.True(parsed);
 
@@ -94,11 +94,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTestWithJoinClientSide()
 		{
 			string line = ":WiZ JOIN #foo,#bar fubar,foobar";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("WiZ", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.JOIN, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.JOIN, query.Command);
 			Assert.AreEqual("#foo,#bar fubar,foobar", query.Parameter);
 			Assert.True(parsed);
 
@@ -108,11 +108,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseTesBlank()
 		{
 			string line = "";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE, query.Command);
 			Assert.AreEqual("", query.Parameter);
 			Assert.False(parsed);
 
@@ -122,11 +122,11 @@ namespace UnitTest.IRCParser
 		public void RandomQueryTest()
 		{
 			string line = "PRIVMSG #mslot.dk :kingkong";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.PRIVMSG, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PRIVMSG, query.Command);
 			Assert.AreEqual("#mslot.dk :kingkong", query.Parameter);
 			Assert.True(parsed);
 
@@ -136,11 +136,11 @@ namespace UnitTest.IRCParser
 		public void QueryParseNUmericReply005()
 		{
 			string line = ":jubii.dk.quakenet.org 005 ro-bertbot MAXNICKLEN=15 TOPICLEN=250 AWAYLEN=160 KICKLEN=250 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDducCNMT CASEMAPPING=rfc1459 NETWORK=QuakeNet :are supported by this server";
-			IRCSharp.Kernel.Query.IRCCommandQuery query = null;
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery query = null;
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("jubii.dk.quakenet.org", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Query.ResponseCommand.RPL_ISUPPORT, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.RPL_ISUPPORT, query.Command);
 			Assert.AreEqual("ro-bertbot MAXNICKLEN=15 TOPICLEN=250 AWAYLEN=160 KICKLEN=250 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDducCNMT CASEMAPPING=rfc1459 NETWORK=QuakeNet :are supported by this server", query.Parameter);
 			Assert.True(parsed);
 

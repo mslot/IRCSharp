@@ -19,14 +19,14 @@ namespace IRCSharp.MSMQTestProgram
 			Console.WriteLine("stopped");
 		}
 
-		static void ReceiveCompleted(Kernel.Query.IRCCommandQuery query)
+		static void ReceiveCompleted(Kernel.Model.Query.IRCCommandQuery query)
 		{
 			Console.WriteLine(":::::::::::::::::::::::::::::::::::::::Received");
 			Console.WriteLine(query.RawLine);
 
 			if (query.RawLine.Contains("gonggong"))
 			{
-				IRCSharp.Kernel.Query.IRCCommandQuery toBot = null;
+				IRCSharp.Kernel.Model.Query.IRCCommandQuery toBot = null;
 				if (IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse("PRIVMSG #mslot.dk :kingkong", out toBot))
 				{
 					Console.WriteLine("Trying to write to bot..." + query.RawLine);
