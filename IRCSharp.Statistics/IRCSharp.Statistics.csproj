@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{13984363-201D-4E61-8CBD-A601F1201591}</ProjectGuid>
+    <ProjectGuid>{F4C8188A-40D9-421E-AAA7-B60388134ECA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IRCSharp.Model</RootNamespace>
-    <AssemblyName>IRCSharp.Model</AssemblyName>
+    <RootNamespace>IRCSharp.Statistics</RootNamespace>
+    <AssemblyName>IRCSharp.Statistics</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,27 +35,23 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\CommandActivator.cs" />
-    <Compile Include="CommandBase.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IIdentifiable.cs" />
-    <Compile Include="Parser\IParsable.cs" />
-    <Compile Include="Parser\CommandType.cs" />
-    <Compile Include="Parser\ParseCommand.cs" />
-    <Compile Include="Parser\ParseParams.cs" />
-    <Compile Include="Parser\ParsePrefix.cs" />
-    <Compile Include="Parser\ParserStatus.cs" />
-    <Compile Include="Parser\Query.cs" />
-    <Compile Include="Parser\QueryParser.cs" />
-    <Compile Include="Parser\QueryTokensizerParser.cs" />
+    <Compile Include="IRCCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IRCSharp.Kernel\IRCSharp.Kernel.csproj">
+      <Project>{2BCF5B79-0118-4D68-9A19-0FFFEC117685}</Project>
+      <Name>IRCSharp.Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRCSharp.Statistics.Kernel\IRCSharp.Statistics.Kernel.csproj">
+      <Project>{962DBF19-FD05-4256-AC3E-D441607AD1E9}</Project>
+      <Name>IRCSharp.Statistics.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

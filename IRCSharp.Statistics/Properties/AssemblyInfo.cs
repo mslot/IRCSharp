@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("IRCSharp.Model")]
+[assembly: AssemblyTitle("IRCSharp.Statistics")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IRCSharp.Model")]
+[assembly: AssemblyProduct("IRCSharp.Statistics")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("55a894b7-abe0-421f-926e-8387feef5073")]
+[assembly: Guid("dd36c12d-676c-4b46-b22b-4b7ff76bdf1f")]
 
 // Version information for an assembly consists of the following four values:
 //

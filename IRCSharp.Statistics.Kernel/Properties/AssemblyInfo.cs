@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StatisticManager")]
+[assembly: AssemblyTitle("IRCSharp.Statistics.Kernel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("StatisticManager")]
+[assembly: AssemblyProduct("IRCSharp.Statistics.Kernel")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9bb2f5ca-cff0-42cc-8bdd-78d0e89cf382")]
+[assembly: Guid("897fbf21-223b-402e-9391-93d77dbd2972")]
 
 // Version information for an assembly consists of the following four values:
 //

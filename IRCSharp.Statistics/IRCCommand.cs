@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StatisticManager
+namespace IRCSharp.Statistics
 {
 	[IRCSharp.Kernel.IRCCommand(IRCSharp.Kernel.Query.ResponseCommand.ALL)]
-	public class Statistics : IRCSharp.Kernel.ResponseCommandBase
+	public class StatisticsIRCCommand : IRCSharp.Kernel.ResponseCommandBase
 	{
 		private static Raven.Client.Embedded.EmbeddableDocumentStore _documentStore = new Raven.Client.Embedded.EmbeddableDocumentStore { DataDirectory = @"C:\data\testRavenDb", UseEmbeddedHttpServer = true };
 		private Raven.Client.IDocumentSession _session;
 
-		public Statistics()
+		public StatisticsIRCCommand()
 		{
 		}
 

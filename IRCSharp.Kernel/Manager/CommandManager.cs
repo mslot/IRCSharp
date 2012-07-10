@@ -72,12 +72,16 @@ namespace IRCSharp.Kernel.Manager
 				_ircCommandsGlobal.TryInsert(command.Name, new List<CommandInformation<Query.ResponseCommand>>());
 				_ircCommandsGlobal[command.Name].Add(command);
 			}
+
+			//TODO: remember to init the command
 		}
 
 		internal void InsertIRCCommand(Type commandType, Query.ResponseCommand name, string absoluteFilePath)
 		{
 			CommandInformation<Query.ResponseCommand> information = new CommandInformation<Query.ResponseCommand>(commandType, name, absoluteFilePath);
 			InsertIRCCommand(information);
+
+			//TODO: remember to init the command
 		}
 
 		/// <summary>
@@ -89,12 +93,16 @@ namespace IRCSharp.Kernel.Manager
 		{
 			_userdefinedCommands.TryInsert(command.Name, new List<CommandInformation<string>>());
 			_userdefinedCommands[command.Name].Add(command);
+
+			//TODO: remember to init the command
 		}
 
 		public void InsertUserdefinedCommand(Type commandType, string name, string absoluteFilePath)
 		{
 			CommandInformation<string> information = new CommandInformation<string>(commandType, name, absoluteFilePath);
 			InsertUserdefinedCommand(information);
+
+			//TODO: remember to init the command
 		}
 
 		public List<Query.IRCCommandQuery> FireUserdefinedCommand(IRCSharp.Kernel.Query.IRCCommandQuery query)

@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\CommandActivator.cs" />
-    <Compile Include="Activation\ICommandActivator.cs" />
     <Compile Include="Bot\IRCBot.cs" />
     <Compile Include="Collections\IRCCommandCollection.cs" />
     <Compile Include="Collections\SynchronizedDictionary.cs" />
