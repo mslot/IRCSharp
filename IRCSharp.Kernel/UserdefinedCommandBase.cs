@@ -8,7 +8,6 @@ namespace IRCSharp.Kernel
 	public abstract class UserdefinedCommandBase : ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>
 	{
 		public abstract Model.Query.IRCCommandQuery Execute(IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery query);
-		public abstract string Name { get; }
 		public string Location { get; set; }
 
 		public UserdefinedCommandBase()

@@ -10,16 +10,12 @@ namespace UserdefinedCommandExample
 	{
 		public override IRCSharp.Kernel.Model.Query.IRCCommandQuery Execute(IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery query)
 		{
-			Console.WriteLine("hello from command");
-			return null;
-		}
-
-		public override string Name
-		{
-			get
+			Console.WriteLine("hello from command: " + query.CommandName);
+			foreach (string param in query.Parameters)
 			{
-				return "hello";
+				Console.WriteLine("param in command: " + param);
 			}
+			return null;
 		}
 
 		public override void Init()
