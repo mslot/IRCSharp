@@ -33,7 +33,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 
 		private int ParseResponseCommand(string line)
 		{
-			Model.Query.IRCCommand responseCommand = Model.Query.IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Model.Query.IRCCommand responseCommand = Model.Query.IRCCommand.NOT_VALID_COMMAND_TYPE;
 			int nextCharCount = -1;
 			if (!String.IsNullOrEmpty(line))
 			{

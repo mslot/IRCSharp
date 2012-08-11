@@ -25,7 +25,7 @@ namespace IRCSharp.Kernel.Model.Query
 		public IRCCommandQuery(string line) : base(String.Empty, String.Empty)
 		{
 			RawLine = line;
-			Command = IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Command = IRCCommand.NOT_VALID_COMMAND_TYPE;
 			Prefix = String.Empty;
 			Parameter = String.Empty;
 		}

@@ -114,7 +114,7 @@ namespace UnitTest.IRCParser
 			bool parsed = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out query);
 
 			Assert.AreEqual("", query.Prefix);
-			Assert.AreEqual(IRCSharp.Kernel.Model.Query.IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE, query.Command);
+			Assert.AreEqual(IRCSharp.Kernel.Model.Query.IRCCommand.NOT_VALID_COMMAND_TYPE, query.Command);
 			Assert.AreEqual("", query.Parameter);
 			Assert.False(parsed);
 

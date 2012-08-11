@@ -17,7 +17,7 @@ namespace IRCSharp.Kernel.Model.Query
 	 */
 	public enum IRCCommand
 	{
-		NOT_VALID_RESPONSE_COMMAND_TYPE,
+		NOT_VALID_COMMAND_TYPE,
 		PRIVMSG,
 		PING,
 		JOIN,

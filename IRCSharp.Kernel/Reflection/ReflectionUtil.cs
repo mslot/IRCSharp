@@ -51,7 +51,7 @@ namespace IRCSharp.Reflection
 		internal static Kernel.Model.Query.IRCCommand GetIRCCommandName(string dllPath)
 		{
 			System.Reflection.Assembly assembly = System.Reflection.Assembly.LoadFrom(dllPath);
-			Kernel.Model.Query.IRCCommand name = Kernel.Model.Query.IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Kernel.Model.Query.IRCCommand name = Kernel.Model.Query.IRCCommand.NOT_VALID_COMMAND_TYPE;
 
 			foreach (Type type in assembly.GetTypes())
 			{
@@ -65,7 +65,7 @@ namespace IRCSharp.Reflection
 				}
 			}
 
-			if (name == null || name == Kernel.Model.Query.IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE)
+			if (name == null || name == Kernel.Model.Query.IRCCommand.NOT_VALID_COMMAND_TYPE)
 				throw new Exception("Dll contains no names, or has a invalid name. This is not a command dll.");
 
 			return name;
