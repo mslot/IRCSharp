@@ -52,7 +52,9 @@
     <Compile Include="Messaging\MessageClient\MessageClient.cs" />
     <Compile Include="Messaging\MessageServer\MessageServer.cs" />
     <Compile Include="Parser\IQuery.cs" />
+    <Compile Include="Parser\IRC\FromParser.cs" />
     <Compile Include="Parser\IRC\IRCParserContext.cs" />
+    <Compile Include="Parser\IRC\ToParser.cs" />
     <Compile Include="Parser\UserdefinedCommand\UserdefinedCommandParser.cs" />
     <Compile Include="Query\Writer\IRCWriter.cs" />
     <Compile Include="ResponseCommandBase.cs" />
@@ -86,6 +88,14 @@
       <Project>{1D617C59-75C9-43C3-AC71-A5520AB3478B}</Project>
       <Name>IRCSharp.Threading</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_Diagrams\ParserCallDiagram.sequencediagram" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="_Diagrams\ParserCallDiagram.sequencediagram.layout">
+      <DependentUpon>ParserCallDiagram.sequencediagram</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

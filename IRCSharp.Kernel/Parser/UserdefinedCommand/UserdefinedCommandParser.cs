@@ -5,11 +5,39 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 {
+	/// <summary>
+	/// Parses the userdefined command string.
+	/// 
+	/// TODO: refactor this in small fragments of parsers like IRCQueryParser.
+	/// </summary>
 	public class UserdefinedCommandParser
 	{
 		private UserdefinedCommandParser()
 		{
 
+		}
+
+
+		public static bool TryParse(string line, out Model.Query.UserdefinedCommandQuery query)
+		{
+			UserdefinedCommandParser parser = new UserdefinedCommandParser();
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
+			Model.Query.UserdefinedCommandQuery output = null;
+			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
+			bool parsed = false;
+
+			if (ircQuery.Command == Model.Query.ResponseCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))
+			{
+				string commandName = parser.ParseCommandName(ircQuery.Parameter);
+				IList<string> commandNameParameters = parser.ParseCommandParameters(ircQuery.Parameter);
+				query = new Model.Query.UserdefinedCommandQuery(commandName, ircQuery);
+				query.AddParameters(commandNameParameters);
+				parsed = true;
+
+			}
+
+			query = output;
+			return parsed;
 		}
 
 		public static bool TryParse(IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery, out IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery)
@@ -19,11 +47,9 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 			Model.Query.UserdefinedCommandQuery query = null;
 			if (ircQuery.Command == Model.Query.ResponseCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))
 			{
-				string to = parser.ParseTo(ircQuery.Parameter);
-				string from = parser.ParseFrom(ircQuery.Prefix);
 				string commandName = parser.ParseCommandName(ircQuery.Parameter);
 				IList<string> commandNameParameters = parser.ParseCommandParameters(ircQuery.Parameter);
-				query = new Model.Query.UserdefinedCommandQuery(to, from, commandName, ircQuery);
+				query = new Model.Query.UserdefinedCommandQuery(commandName, ircQuery);
 				query.AddParameters(commandNameParameters);
 				parsed = true;
 			}
@@ -36,42 +62,12 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 		{
 			int start = ircParameter.IndexOf(':');
 
-			if (ircParameter.Substring(start+1, 1) == "!")
+			if (ircParameter.Substring(start + 1, 1) == "!")
 			{
 				return true;
 			}
 
 			return false;
-		}
-
-		/// <summary>
-		/// parsing the parameter to find the receiver.
-		/// TODO: This should be parsed by the IRC parser
-		/// </summary>
-		/// <param name="parameter">the parameter of the irc query, fx  #mslot.dk :!command arg1 arg2 arg3</param>
-		/// <returns>the receiver(s) of the irc query.</returns>
-		private string ParseTo(string parameter)
-		{
-			int start = 0;
-			int length = parameter.IndexOf(':')-1;
-
-			string to = parameter.Substring(start, length);
-
-			return to;
-		}
-
-		/// <summary>
-		/// Parsing the prefix to find whom sent the message.
-		/// TODO: This should be parsed by the IRC parser
-		/// </summary>
-		/// <param name="prefix">The prefix of the irc query, fx: :mslot!~mslot@56344eba.rev.stofanet.dk</param>
-		/// <returns>the sender</returns>
-		private string ParseFrom(string prefix)
-		{
-			int start = 0;
-			int length = prefix.IndexOf('!');
-
-			return prefix.Substring(start, length);
 		}
 
 		/// <summary>

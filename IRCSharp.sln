@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3CB31D35-153F-4ECA-B059-9428E6C702B8}"
 	ProjectSection(SolutionItems) = preProject
 		readme.markdown = readme.markdown
+		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.MSMQ", "IRCSharp.MSMQ\IRCSharp.MSMQ.csproj", "{D0440F07-2852-413E-BD56-3C5BC245EE0E}"

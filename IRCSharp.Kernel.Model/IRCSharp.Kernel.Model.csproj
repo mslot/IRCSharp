@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\Commandbase.cs" />
     <Compile Include="Query\IRCCommandQuery.cs" />
     <Compile Include="Query\ResponseCommand.cs" />
     <Compile Include="Query\UserdefinedCommandQuery.cs" />

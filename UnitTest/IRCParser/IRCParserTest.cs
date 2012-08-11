@@ -32,6 +32,8 @@ namespace UnitTest.IRCParser
 			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk",query.Prefix);
 			Assert.AreEqual(IRCSharp.Kernel.Model.Query.ResponseCommand.PRIVMSG, query.Command);
 			Assert.AreEqual("#mslot.dk :!command arg1 arg2 arg3", query.Parameter);
+			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk", query.From);
+			Assert.AreEqual("#mslot.dk", query.To);
 			Assert.True(parsed);
 
 		}

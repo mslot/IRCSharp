@@ -30,9 +30,12 @@ namespace IRCSharp.Kernel.Threading
 
 			var userdefinedResults = _commandManager.FireUserdefinedCommand(_query);
 
-			foreach (var results in userdefinedResults)
+			if (userdefinedResults != null)
 			{
-				(new OutputThread(_ircWriter, results)).Start();
+				foreach (var results in userdefinedResults)
+				{
+					(new OutputThread(_ircWriter, results)).Start();
+				}
 			}
 		}
 	}

@@ -15,11 +15,18 @@ namespace IRCSharp.Kernel.Parser.IRC
 			_context = context;
 			_line = _context.Line;
 		}
-
+		
 		public int Parse()
 		{
 			int nextCharCount = ParseResponseCommand(_line);
-			_context.CurrentState = new ParamsParser(_context);
+			if (_line[nextCharCount + 1] == ':')
+			{
+				_context.CurrentState = new ParamsParser(_context);
+			}
+			else
+			{
+				_context.CurrentState = new ToParser(_context);
+			}
 
 			return nextCharCount;
 		}

@@ -24,7 +24,7 @@ namespace UnitTest.UserdefinedCommand
 
 			Assert.NotNull(userdefinedCommandQuery);
 			Assert.True(parsedUserdefinedCommand);
-			Assert.AreEqual("mslot", userdefinedCommandQuery.From);
+			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk", userdefinedCommandQuery.From);
 			Assert.AreEqual("#mslot.dk", userdefinedCommandQuery.To);
 			Assert.AreEqual("command", userdefinedCommandQuery.CommandName);
 			Assert.Contains("arg1", userdefinedCommandQuery.Parameters);
@@ -47,7 +47,7 @@ namespace UnitTest.UserdefinedCommand
 
 			Assert.NotNull(userdefinedCommandQuery);
 			Assert.True(parsedUserdefinedCommand);
-			Assert.AreEqual("mslot", userdefinedCommandQuery.From);
+			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk", userdefinedCommandQuery.From);
 			Assert.AreEqual("#mslot.dk", userdefinedCommandQuery.To);
 			Assert.AreEqual("hello", userdefinedCommandQuery.CommandName);
 

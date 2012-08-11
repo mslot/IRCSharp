@@ -1,0 +1,6 @@
+Dette er en intern dansk TODO liste jeg har lavet for at holde styr over hvad det er jeg skal lave, da der kan gå lidt tid imellem udviklingen:
+	1. MSMQ logik skal rettes til og gennemgåes for fejl.
+	2. Statistics modulet skal laves færdig
+		5a. Der skal laves noget logik som kan opbygge en struktur ala "queries pr. kanal pr. bruger".
+	3. Lav auth logik så man eventuel skal være authed for at udføre nogle kommandoer.
+	4. Lav en SIMPEL logging motor som skriver til DB og mail.
