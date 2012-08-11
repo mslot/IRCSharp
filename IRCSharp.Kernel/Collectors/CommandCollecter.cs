@@ -35,7 +35,7 @@ namespace IRCSharp.Kernel.Collecters
 				if (Reflection.ReflectionUtil.IsOfType<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath))
 				{
 					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<string, IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery>>(absoluteFilePath);
-					string name = Reflection.ReflectionUtil.GetUserdefinedName(directoryPath);
+					string name = Reflection.ReflectionUtil.GetUserdefinedName(absoluteFilePath);
 
 					CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);
 				}

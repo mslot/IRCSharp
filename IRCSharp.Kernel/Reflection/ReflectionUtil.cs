@@ -92,9 +92,18 @@ namespace IRCSharp.Reflection
 		internal static string GetUserdefinedName(string directoryPath)
 		{
 			System.Reflection.Assembly assembly = System.Reflection.Assembly.LoadFrom(directoryPath);
-			string name = assembly.GetCustomAttributes(typeof(IRCSharp.Kernel.UserdefinedCommandAttribute), false)
-							   .Select(attribute => ((IRCSharp.Kernel.UserdefinedCommandAttribute)attribute).Name)
-							   .FirstOrDefault();
+			string name = null;
+			foreach (Type type in assembly.GetTypes())
+			{
+				if (type.GetCustomAttributes(typeof(IRCSharp.Kernel.UserdefinedCommandAttribute), true).Count() > 0)
+				{
+					name = type.GetCustomAttributes(typeof(IRCSharp.Kernel.UserdefinedCommandAttribute), true)
+								   .Select(attribute => ((IRCSharp.Kernel.UserdefinedCommandAttribute)attribute).Name)
+								   .FirstOrDefault();
+
+					break;
+				}
+			}
 
 			if (name == null)
 				throw new Exception("Dll contains no names. This is not a command dll.");
