@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel
 {
-	public abstract class ResponseCommandBase : ICommand<IRCSharp.Kernel.Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>
+	public abstract class ResponseCommandBase : ICommand<IRCSharp.Kernel.Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>
 	{
 		public string Location { get; set; }
 		public abstract Model.Query.IRCCommandQuery Execute(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);

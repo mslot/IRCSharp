@@ -36,6 +36,7 @@ namespace IRCSharp.Kernel.Bot
 			_clientStream = _client.GetStream();
 			_ircWriter = new Model.Query.Writer.IRCWriter<System.IO.Stream>(_clientStream);
 			_clientReader = new System.IO.StreamReader(_clientStream);
+
 			_messageServer = new Messaging.MessageServer.MessageServer<Model.Query.IRCCommandQuery>(
 				Messaging.Configuration.MessageServerConfiguration.BotServerQueuePath, 
 				Messaging.Configuration.MessageServerConfiguration.BotServerOutgoingPath
@@ -86,7 +87,7 @@ namespace IRCSharp.Kernel.Bot
 				{
 					var incomingThread = new IRCSharp.Kernel.Threading.IncomingThread(query, _commandCollecter.CommandManager, _ircWriter);
 					incomingThread.Start();
-					if (query.Command == Model.Query.ResponseCommand.RPL_ENDOFMOTD || query.Command == Model.Query.ResponseCommand.ERR_NOMOTD)
+					if (query.Command == Model.Query.IRCCommand.RPL_ENDOFMOTD || query.Command == Model.Query.IRCCommand.ERR_NOMOTD)
 					{
 						_ircWriter.Join(_channels);
 						run = false;

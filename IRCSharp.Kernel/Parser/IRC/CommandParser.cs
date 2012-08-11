@@ -33,7 +33,7 @@ namespace IRCSharp.Kernel.Parser.IRC
 
 		private int ParseResponseCommand(string line)
 		{
-			Model.Query.ResponseCommand responseCommand = Model.Query.ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Model.Query.IRCCommand responseCommand = Model.Query.IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
 			int nextCharCount = -1;
 			if (!String.IsNullOrEmpty(line))
 			{
@@ -62,20 +62,20 @@ namespace IRCSharp.Kernel.Parser.IRC
 			}
 		}
 
-		private Model.Query.ResponseCommand DetermineResponseCommand(string command)
+		private Model.Query.IRCCommand DetermineResponseCommand(string command)
 		{
-			Model.Query.ResponseCommand message = default(Model.Query.ResponseCommand);
+			Model.Query.IRCCommand message = default(Model.Query.IRCCommand);
 			switch (command)
 			{
-				case "422": message = Model.Query.ResponseCommand.ERR_NOMOTD; break;
-				case "375": message = Model.Query.ResponseCommand.RPL_MOTDSTART; break;
-				case "372": message = Model.Query.ResponseCommand.RPL_MOTD; break;
-				case "376": message = Model.Query.ResponseCommand.RPL_ENDOFMOTD; break;
-				case "221": message = Model.Query.ResponseCommand.RPL_UMODEIS; break;
-				case "005": message = Model.Query.ResponseCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
-				case "PRIVMSG": message = Model.Query.ResponseCommand.PRIVMSG; break;
-				case "PING": message = Model.Query.ResponseCommand.PING; break;
-				case "JOIN": message = Model.Query.ResponseCommand.JOIN; break;
+				case "422": message = Model.Query.IRCCommand.ERR_NOMOTD; break;
+				case "375": message = Model.Query.IRCCommand.RPL_MOTDSTART; break;
+				case "372": message = Model.Query.IRCCommand.RPL_MOTD; break;
+				case "376": message = Model.Query.IRCCommand.RPL_ENDOFMOTD; break;
+				case "221": message = Model.Query.IRCCommand.RPL_UMODEIS; break;
+				case "005": message = Model.Query.IRCCommand.RPL_ISUPPORT; break; //defacto standard http://www.mirc.com/isupport.html, not official. Implemented by Undernet software
+				case "PRIVMSG": message = Model.Query.IRCCommand.PRIVMSG; break;
+				case "PING": message = Model.Query.IRCCommand.PING; break;
+				case "JOIN": message = Model.Query.IRCCommand.JOIN; break;
 			}
 
 			return message;

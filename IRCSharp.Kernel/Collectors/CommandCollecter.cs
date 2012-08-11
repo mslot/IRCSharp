@@ -39,10 +39,10 @@ namespace IRCSharp.Kernel.Collecters
 
 					CommandManager.InsertUserdefinedCommand(commandType, name, absoluteFilePath);
 				}
-				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath))
+				else if (Reflection.ReflectionUtil.IsOfType<ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath))
 				{
-					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath);
-					Model.Query.ResponseCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
+					commandType = Reflection.ReflectionUtil.GetTypeOf<ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(absoluteFilePath);
+					Model.Query.IRCCommand name = Reflection.ReflectionUtil.GetIRCCommandName(absoluteFilePath);
 
 					CommandManager.InsertIRCCommand(commandType, name, absoluteFilePath);
 				}

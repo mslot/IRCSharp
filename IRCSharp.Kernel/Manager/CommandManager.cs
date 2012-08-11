@@ -19,7 +19,7 @@ namespace IRCSharp.Kernel.Manager
 		public CommandManager()
 		{
 			InsertIRCCommand(typeof(IRCSharp.Kernel.Manager.Commands.PingCommand),
-				Model.Query.ResponseCommand.PING, 
+				Model.Query.IRCCommand.PING, 
 				String.Empty);
 		}
 
@@ -42,12 +42,12 @@ namespace IRCSharp.Kernel.Manager
 			return _userdefinedCommands.TryGet(name);
 		}
 
-		public List<CommandInformation<Model.Query.ResponseCommand>> GetIRCCommand(Kernel.Model.Query.ResponseCommand type)
+		public List<CommandInformation<Model.Query.IRCCommand>> GetIRCCommand(Kernel.Model.Query.IRCCommand type)
 		{
 			var allGlobalCommands = _ircCommandsGlobal.GetUnsynchronizedDictionary();
 			var specificCommands = _ircCommands.TryGet(type);
 
-			var all = new List<CommandInformation<Model.Query.ResponseCommand>>();
+			var all = new List<CommandInformation<Model.Query.IRCCommand>>();
 
 			if (specificCommands != null && specificCommands.Count > 0)
 			{
@@ -62,23 +62,23 @@ namespace IRCSharp.Kernel.Manager
 			return all;
 		}
 
-		public void InsertIRCCommand(CommandInformation<Model.Query.ResponseCommand> command)
+		public void InsertIRCCommand(CommandInformation<Model.Query.IRCCommand> command)
 		{
-			_ircCommands.TryInsert(command.Name, new List<CommandInformation<Model.Query.ResponseCommand>>());
+			_ircCommands.TryInsert(command.Name, new List<CommandInformation<Model.Query.IRCCommand>>());
 			_ircCommands[command.Name].Add(command);
 
-			if (command.Name == Model.Query.ResponseCommand.ALL)
+			if (command.Name == Model.Query.IRCCommand.ALL)
 			{
-				_ircCommandsGlobal.TryInsert(command.Name, new List<CommandInformation<Model.Query.ResponseCommand>>());
+				_ircCommandsGlobal.TryInsert(command.Name, new List<CommandInformation<Model.Query.IRCCommand>>());
 				_ircCommandsGlobal[command.Name].Add(command);
 			}
 
 			//TODO: remember to init the command
 		}
 
-		internal void InsertIRCCommand(Type commandType, Model.Query.ResponseCommand name, string absoluteFilePath)
+		internal void InsertIRCCommand(Type commandType, Model.Query.IRCCommand name, string absoluteFilePath)
 		{
-			CommandInformation<Model.Query.ResponseCommand> information = new CommandInformation<Model.Query.ResponseCommand>(commandType, name, absoluteFilePath);
+			CommandInformation<Model.Query.IRCCommand> information = new CommandInformation<Model.Query.IRCCommand>(commandType, name, absoluteFilePath);
 			InsertIRCCommand(information);
 
 			//TODO: remember to init the command
@@ -134,7 +134,7 @@ namespace IRCSharp.Kernel.Manager
 
 		public List<Model.Query.IRCCommandQuery> FireIRCCommand(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
 		{
-			List<CommandInformation<Model.Query.ResponseCommand>> ircCommandInformation = this.GetIRCCommand(query.Command);
+			List<CommandInformation<Model.Query.IRCCommand>> ircCommandInformation = this.GetIRCCommand(query.Command);
 			List<Model.Query.IRCCommandQuery> results = null;
 
 			if (ircCommandInformation != null)
@@ -142,7 +142,7 @@ namespace IRCSharp.Kernel.Manager
 				results = new List<Model.Query.IRCCommandQuery>();
 				foreach (var commandInformation in ircCommandInformation)
 				{
-					ICommand<Model.Query.ResponseCommand, Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.ResponseCommand, Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
+					ICommand<Model.Query.IRCCommand, Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.IRCCommand, Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
 					if (command != null)
 					{
 						var queryResult = command.Execute(query);
@@ -167,13 +167,13 @@ namespace IRCSharp.Kernel.Manager
 
 		private void InitGlobalCommands()
 		{
-			Dictionary<Model.Query.ResponseCommand, List<CommandInformation<Model.Query.ResponseCommand>>> commandInformations = _ircCommandsGlobal.GetUnsynchronizedDictionary();
+			Dictionary<Model.Query.IRCCommand, List<CommandInformation<Model.Query.IRCCommand>>> commandInformations = _ircCommandsGlobal.GetUnsynchronizedDictionary();
 
 			foreach (var kvpCommands in commandInformations)
 			{
 				foreach (var commandInformation in kvpCommands.Value)
 				{
-					ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
+					ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
 					command.Init();
 				}
 			}
@@ -181,13 +181,13 @@ namespace IRCSharp.Kernel.Manager
 
 		private void InitIRCCommands()
 		{
-			Dictionary<Model.Query.ResponseCommand, List<CommandInformation<Model.Query.ResponseCommand>>> commandInformations = _ircCommands.GetUnsynchronizedDictionary();
+			Dictionary<Model.Query.IRCCommand, List<CommandInformation<Model.Query.IRCCommand>>> commandInformations = _ircCommands.GetUnsynchronizedDictionary();
 
 			foreach (var kvpCommands in commandInformations)
 			{
 				foreach (var commandInformation in kvpCommands.Value)
 				{
-					ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.ResponseCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
+					ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery> command = Reflection.ReflectionUtil.LoadTypeOf<ICommand<Model.Query.IRCCommand, IRCSharp.Kernel.Model.Query.IRCCommandQuery>>(commandInformation.CommandType);
 					command.Init();
 				}
 			}

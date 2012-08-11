@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Statistics
 {
-	[IRCSharp.Kernel.IRCCommand(IRCSharp.Kernel.Model.Query.ResponseCommand.ALL)]
+	[IRCSharp.Kernel.IRCCommand(IRCSharp.Kernel.Model.Query.IRCCommand.ALL)]
 	public class StatisticsIRCCommand : IRCSharp.Kernel.ResponseCommandBase
 	{
 

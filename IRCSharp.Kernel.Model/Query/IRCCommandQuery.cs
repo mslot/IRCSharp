@@ -9,7 +9,7 @@ namespace IRCSharp.Kernel.Model.Query
 	{
 		public string RawLine { get; set; }
 		public string Prefix { get; set; }
-		public ResponseCommand Command { get; set; }
+		public IRCCommand Command { get; set; }
 		public string Parameter { get; set; }
 
 		public IRCCommandQuery() : base()
@@ -25,7 +25,7 @@ namespace IRCSharp.Kernel.Model.Query
 		public IRCCommandQuery(string line) : base(String.Empty, String.Empty)
 		{
 			RawLine = line;
-			Command = ResponseCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
+			Command = IRCCommand.NOT_VALID_RESPONSE_COMMAND_TYPE;
 			Prefix = String.Empty;
 			Parameter = String.Empty;
 		}

@@ -6,14 +6,16 @@ using System.Text;
 namespace IRCSharp.Kernel.Model.Query
 {
 	/*
-	 * Responses from server. This is either:
+	 * IRC commands. This is either:
 	 *	1. A common command like PRIVMSG
 	 *	2. A RPL (reply)
 	 *	3. An ERR (error)
 	 *	
 	 * The RPL or ERR is numeric.
+	 * 
+	 * TODO: Break this up in command, and reply commands.
 	 */
-	public enum ResponseCommand
+	public enum IRCCommand
 	{
 		NOT_VALID_RESPONSE_COMMAND_TYPE,
 		PRIVMSG,

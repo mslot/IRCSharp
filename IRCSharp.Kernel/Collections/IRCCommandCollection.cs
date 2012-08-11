@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Kernel.Collections
 {
-	class IRCCommandCollection : SynchronizedDictionary<Kernel.Model.Query.ResponseCommand, List<CommandInformation<Model.Query.ResponseCommand>>>
+	class IRCCommandCollection : SynchronizedDictionary<Kernel.Model.Query.IRCCommand, List<CommandInformation<Model.Query.IRCCommand>>>
 	{
 	}
 }
