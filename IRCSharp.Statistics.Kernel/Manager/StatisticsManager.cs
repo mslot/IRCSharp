@@ -16,7 +16,7 @@ namespace IRCSharp.Statistics.Kernel.Manager
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
 		{
-			
+			_databaseDal.AddQuery(query);
 		}
 	}
 }

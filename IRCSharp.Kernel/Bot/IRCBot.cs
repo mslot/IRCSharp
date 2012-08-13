@@ -21,7 +21,8 @@ namespace IRCSharp.Kernel.Bot
 		private string _hostname;
 		private string _channels;
 
-		public IRCBot(string server, int port, string dllPath, string username, string name, string channels, string hostname = "rubber_duck_robert_bot@hell.org") : base("main_bot_thread")
+		public IRCBot(string server, int port, string dllPath, string username, string name, string channels, string hostname = "rubber_duck_robert_bot@hell.org") 
+			: base("main_bot_thread")
 		{
 			_channels = channels;
 			_username = username;
