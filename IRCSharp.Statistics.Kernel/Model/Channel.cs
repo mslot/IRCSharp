@@ -11,10 +11,12 @@ namespace IRCSharp.Statistics.Kernel.Model
 		public string ChannelName { get; private set; }
 		public string Network { get; private set; }
 		public string FullPath { get { return Network + "/" + ChannelName; } }
+		public string Id { get; private set; }
 
 		public Channel(string channelName)
 		{
 			ChannelName = channelName;
+			Id = FullPath;
 		}
 
 		public override bool Equals(object obj)

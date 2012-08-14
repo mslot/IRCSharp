@@ -28,19 +28,17 @@ namespace IRCSharp.Statistics.Kernel.Dal
 			_documentStore.Initialize();
 			using (_session = _documentStore.OpenSession())
 			{
-				//TODO: add or update user
-				bool doesChannelExist = _session.Query<Model.Channel>().Any(chan => chan.ChannelName == query.To);
-
-				if (doesChannelExist)
+				bool doesUserExist = _session.Query<Model.User>().Any(user => user.Nick == query.From);
+				if (doesUserExist)
 				{
-					//TODO: Add query to channel
+					//TODO: find channel
+					//if exists, add query to channel
+					//if not exists, add channel, then add query
 				}
 				else
 				{
-					//Add channel as new document
-					Model.Channel newChannel = new Model.Channel(channelName: query.To);
-					newChannel.Queries.Add(query);
-					_session.Store(newChannel);
+					//TODO: add user to user
+					//TODO: add channel with query
 				}
 
 				_session.SaveChanges();

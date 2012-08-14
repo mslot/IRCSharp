@@ -7,11 +7,14 @@ namespace IRCSharp.Statistics.Kernel.Model
 {
 	public class User
 	{
+		public string Id { get; private set; }
 		public List<Channel> Channels = new List<Channel>();
+		public string Nick { get; private set; }
 
-		public User()
+		public User(string nick)
 		{
-
+			Nick = nick;
+			Id = Nick;
 		}
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
