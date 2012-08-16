@@ -4,7 +4,7 @@ IRCSharp is a modular IRC robot. Through a simple contract it is possible to ext
 
 Quick start
 ----------
-See [Quick start guide](https://bitbucket.org/msl0t/ircsharp/wiki/Home) (soon to be changed to github). This readme has not been updated yet with examples on how to use the MessageQueue API, but I am in the process of writing one. If you are interested in seeing how it is done, then take a look in the MSMQTestProgram. Remember to install MessageQueue.
+See [Quick start guide] (soon to be changed to github). This readme has not been updated yet with examples on how to use the MessageQueue API, but I am in the process of writing one. If you are interested in seeing how it is done, then take a look in the MSMQTestProgram. Remember to install MessageQueue.
 
 Known bugs
 ----------
