@@ -8,7 +8,7 @@ See [Quick start guide] (https://github.com/mslot/IRCSharp/wiki/QuickStart). Thi
 
 Known bugs
 ----------
-This is an beta (second beta) release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
+This is the third beta release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
 
 + Netsplits
 + Mass querying the bot (and flooding the channel)
