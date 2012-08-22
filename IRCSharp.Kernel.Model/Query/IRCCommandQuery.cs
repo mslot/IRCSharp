@@ -12,17 +12,36 @@ namespace IRCSharp.Kernel.Model.Query
 		public IRCCommand Command { get; set; }
 		public string Parameter { get; set; }
 
-		public IRCCommandQuery() : base()
+		public IRCCommandQuery()
+			: base()
 		{
 
 		}
 
-		public IRCCommandQuery(string from, string to) : base(from, to)
+		public IRCCommandQuery(string from, string to)
+			: base(from, to)
 		{
 
 		}
 
-		public IRCCommandQuery(string line) : base(String.Empty, String.Empty)
+		public string Nick
+		{
+			get
+			{
+				return Prefix;
+			}
+		}
+
+		public string Channel
+		{
+			get
+			{
+				return From;
+			}
+		}
+
+		public IRCCommandQuery(string line)
+			: base(String.Empty, String.Empty)
 		{
 			RawLine = line;
 			Command = IRCCommand.NOT_VALID_COMMAND_TYPE;

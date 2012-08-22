@@ -32,58 +32,58 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncCtpLibrary">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\AsyncCtpLibrary.dll</HintPath>
+      <HintPath>..\Lib\Raven\AsyncCtpLibrary.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\Lib\Raven\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Esent.Interop">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Esent.Interop.dll</HintPath>
+      <HintPath>..\Lib\Raven\Esent.Interop.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath>..\Lib\Raven\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Lucene.Net.dll</HintPath>
+      <HintPath>..\Lib\Raven\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.Spatial">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Lucene.Net.Contrib.Spatial.dll</HintPath>
+      <HintPath>..\Lib\Raven\Lucene.Net.Contrib.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.SpellChecker">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
+      <HintPath>..\Lib\Raven\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Lib\Raven\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\NLog.dll</HintPath>
+      <HintPath>..\Lib\Raven\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Abstractions.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Embedded">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Client.Embedded.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Client.Embedded.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Client.Lightweight.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Lightweight.FSharp">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Client.Lightweight.FSharp.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Client.Lightweight.FSharp.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.MvcIntegration">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Client.MvcIntegration.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Client.MvcIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Database">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Database.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Database.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Munin">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Munin.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Munin.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Storage.Esent">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Storage.Esent.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Storage.Esent.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Storage.Managed">
-      <HintPath>..\..\..\lib\RavenDB\EmbeddedClient\Raven.Storage.Managed.dll</HintPath>
+      <HintPath>..\Lib\Raven\Raven.Storage.Managed.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

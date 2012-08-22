@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IRCSharp.Statistics.Kernel.Dal
 {
-	public interface IDal
+	public interface IDal : IDisposable
 	{
 		void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);
 	}

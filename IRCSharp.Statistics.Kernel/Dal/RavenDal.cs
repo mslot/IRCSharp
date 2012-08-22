@@ -10,30 +10,35 @@ namespace IRCSharp.Statistics.Kernel.Dal
 		private Raven.Client.Embedded.EmbeddableDocumentStore _documentStore = null;
 		private Raven.Client.IDocumentSession _session;
 
-		public RavenDal(string dataDirectory, bool useEmbeddedHttpServer = false)
+		public RavenDal(string dataDirectory, bool useEmbeddedHttpServer = false, bool runInMemory = false)
 		{
-			InitDatastore(dataDirectory, useEmbeddedHttpServer);
+			InittializeDatastore(dataDirectory, useEmbeddedHttpServer, runInMemory);
 		}
 
-		private void InitDatastore(string dataDirectory, bool useEmbeddedHttpServer)
+		private void InittializeDatastore(string dataDirectory, bool useEmbeddedHttpServer, bool runInMemory)
 		{
-			_documentStore = new Raven.Client.Embedded.EmbeddableDocumentStore { DataDirectory = dataDirectory, UseEmbeddedHttpServer = useEmbeddedHttpServer };
+			_documentStore = new Raven.Client.Embedded.EmbeddableDocumentStore { DataDirectory = dataDirectory, UseEmbeddedHttpServer = useEmbeddedHttpServer, RunInMemory = runInMemory };
 			_documentStore.Initialize();
-			_session = _documentStore.OpenSession();
-
 		}
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
 		{
-			_documentStore.Initialize();
 			using (_session = _documentStore.OpenSession())
 			{
-				bool doesUserExist = _session.Query<Model.User>().Any(user => user.Nick == query.From);
+				bool doesUserExist = _session.Query<Model.User>().Any(user => user.Nick == query.Nick);
 				if (doesUserExist)
 				{
 					//TODO: find channel
-					//if exists, add query to channel
-					//if not exists, add channel, then add query
+					bool doesChannelExist = _session.Query<Model.User>().Any(user => user.Nick == query.Nick && user.Channels.Any(channel => channel.ChannelName == query.Channel));
+					if (doesChannelExist)
+					{
+						//TODO. With partial update -> add query to channel
+						//_documentStore.DatabaseCommands.Patch("users/" + query.Nick, )
+					}
+					else
+					{
+						//if not exists, add channel, then add query, then add channel with partial update
+					}
 				}
 				else
 				{
@@ -45,6 +50,11 @@ namespace IRCSharp.Statistics.Kernel.Dal
 			}
 
 			Console.WriteLine("Collecting stats from: " + query.RawLine);
+		}
+
+		public void Dispose()
+		{
+			_documentStore.Dispose();
 		}
 	}
 }
