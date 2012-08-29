@@ -23,7 +23,7 @@ namespace IRCSharp.Statistics.Kernel.Model
 
 			foreach (Channel channel in Channels)
 			{
-				if (channel.ChannelName == query.To)
+				if (channel.ChannelName == query.To) //TODO: is To an channel? Is it a comma seperated list of channels and users?
 				{
 					channel.Queries.Add(query);
 					found = true;
@@ -33,7 +33,7 @@ namespace IRCSharp.Statistics.Kernel.Model
 
 			if (!found)
 			{
-				var newChannel = new Channel(channelName: query.To);
+				var newChannel = new Channel(channelName: query.To); //TODO: this could be a seperated list of users and channels. This should be handled! We should check of To is a channel!!
 				newChannel.Queries.Add(query);
 				Channels.Add(newChannel);
 			}

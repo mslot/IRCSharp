@@ -9,7 +9,7 @@ namespace IRCSharp.Statistics.Kernel.Model
 	{
 		public List<IRCSharp.Kernel.Model.Query.IRCCommandQuery> Queries = new List<IRCSharp.Kernel.Model.Query.IRCCommandQuery>();
 		public string ChannelName { get; private set; }
-		public string Network { get; private set; }
+		public string Network { get; private set; } //TODO: implement network
 		public string FullPath { get { return Network + "/" + ChannelName; } }
 		public string Id { get; private set; }
 
@@ -21,7 +21,14 @@ namespace IRCSharp.Statistics.Kernel.Model
 
 		public override bool Equals(object obj)
 		{
-			return this.Equals((Channel)obj);
+			if (obj is Channel)
+			{
+				return this.Equals((Channel)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public bool Equals(Channel other)

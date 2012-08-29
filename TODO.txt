@@ -5,4 +5,4 @@ Dette er en intern dansk TODO liste jeg har lavet for at holde styr over hvad de
 	3. Lav en SIMPEL logging motor som skriver til DB og mail.
 	4. Lave så userdefined commands og response commands bliver lagt i seperate mapper i dlls mappen.
 	5. Netsplit handling.
-	6. Handling mass quering bot.
+	6. Håndtering af mass quering.

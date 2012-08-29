@@ -28,28 +28,44 @@ namespace IRCSharp.Statistics.Kernel.Dal
 				bool doesUserExist = _session.Query<Model.User>().Any(user => user.Nick == query.Nick);
 				if (doesUserExist)
 				{
-					//TODO: find channel
 					bool doesChannelExist = _session.Query<Model.User>().Any(user => user.Nick == query.Nick && user.Channels.Any(channel => channel.ChannelName == query.Channel));
 					if (doesChannelExist)
 					{
-						//TODO. With partial update -> add query to channel
-						//_documentStore.DatabaseCommands.Patch("users/" + query.Nick, )
+						//TODO: With partial update -> add query to channel
+						Model.User user = GetUser(query.Nick);
+						user.AddQuery(query);
+						_session.Store(user);
 					}
 					else
 					{
-						//if not exists, add channel, then add query, then add channel with partial update
+						Model.Channel newChannel = new Model.Channel(query.Channel);
+						newChannel.Queries.Add(query);
+						_documentStore.DatabaseCommands.Patch("users/" + query.Nick,
+							new[] 
+							{ 
+								 new Raven.Abstractions.Data.PatchRequest
+								 {
+									Type = Raven.Abstractions.Data.PatchCommandType.Add,
+									Name = "Channels",
+									Value = Raven.Json.Linq.RavenJObject.FromObject(newChannel)
+								 }
+							});
 					}
 				}
 				else
 				{
-					//TODO: add user to user
-					//TODO: add channel with query
+					Model.User newUser = new Model.User(query.Nick);
+					newUser.AddQuery(query);
+					_session.Store(newUser);
 				}
 
 				_session.SaveChanges();
 			}
+		}
 
-			Console.WriteLine("Collecting stats from: " + query.RawLine);
+		public Model.User GetUser(string nick)
+		{
+			return _session.Load<Model.User>(nick);
 		}
 
 		public void Dispose()

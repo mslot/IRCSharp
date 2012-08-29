@@ -8,5 +8,6 @@ namespace IRCSharp.Statistics.Kernel.Dal
 	public interface IDal : IDisposable
 	{
 		void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);
+		Model.User GetUser(string nick);
 	}
 }

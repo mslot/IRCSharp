@@ -85,11 +85,17 @@ namespace UnitTest.RavenDal
 		public void AddFirstGeneratedQueries()
 		{
 			var generatedQueries = GenerateQueries();
-			using (IRCSharp.Statistics.Kernel.Dal.IDal _dal = new IRCSharp.Statistics.Kernel.Dal.RavenDal(@"C:\data\StatisticsRavenDalTest", useEmbeddedHttpServer: false, runInMemory: true))
+			IRCSharp.Kernel.Model.Query.IRCCommandQuery firstQuery = generatedQueries.First();
+			using (IRCSharp.Statistics.Kernel.Dal.IDal _dal = new IRCSharp.Statistics.Kernel.Dal.RavenDal(@"C:\data\StatisticsRavenDalTest",
+																											useEmbeddedHttpServer: false,
+																											runInMemory: true)
+																											)
 			{
-				_dal.AddQuery(generatedQueries.First());
-				_dal.AddQuery(generatedQueries.First());
+				_dal.AddQuery(firstQuery);
+				IRCSharp.Statistics.Kernel.Model.User user = _dal.GetUser(firstQuery.Nick);
+				Assert.NotNull(user);
 			}
+
 		}
 	}
 }
