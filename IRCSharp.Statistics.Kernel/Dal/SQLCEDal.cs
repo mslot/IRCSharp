@@ -39,16 +39,6 @@ namespace IRCSharp.Statistics.Kernel.Dal
 
 		}
 
-		private bool DoesUserExists(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
-		{
-			throw new NotImplementedException();
-		}
-
-		private bool DoesChannelExists(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Model.User GetUser(string nick)
 		{
 			throw new NotImplementedException();
