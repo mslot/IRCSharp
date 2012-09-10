@@ -96,13 +96,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dal\IDal.cs" />
-    <Compile Include="Dal\RavenDal.cs" />
     <Compile Include="Dal\SQLCEDal.cs" />
     <Compile Include="Manager\StatisticsManager.cs" />
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\StatisticsRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Statistics.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IRCSharp.Kernel.Model\IRCSharp.Kernel.Model.csproj">
