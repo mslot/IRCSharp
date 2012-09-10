@@ -31,60 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncCtpLibrary">
-      <HintPath>..\Lib\Raven\AsyncCtpLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\Lib\Raven\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="Esent.Interop">
-      <HintPath>..\Lib\Raven\Esent.Interop.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\Lib\Raven\ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\Lib\Raven\Lucene.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Contrib.Spatial">
-      <HintPath>..\Lib\Raven\Lucene.Net.Contrib.Spatial.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Contrib.SpellChecker">
-      <HintPath>..\Lib\Raven\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Lib\Raven\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\Lib\Raven\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\Lib\Raven\Raven.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Embedded">
-      <HintPath>..\Lib\Raven\Raven.Client.Embedded.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\Lib\Raven\Raven.Client.Lightweight.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Lightweight.FSharp">
-      <HintPath>..\Lib\Raven\Raven.Client.Lightweight.FSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.MvcIntegration">
-      <HintPath>..\Lib\Raven\Raven.Client.MvcIntegration.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Database">
-      <HintPath>..\Lib\Raven\Raven.Database.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Munin">
-      <HintPath>..\Lib\Raven\Raven.Munin.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Storage.Esent">
-      <HintPath>..\Lib\Raven\Raven.Storage.Esent.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Storage.Managed">
-      <HintPath>..\Lib\Raven\Raven.Storage.Managed.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
