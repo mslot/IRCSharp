@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dal\IDal.cs" />
+    <Compile Include="Dal\RavenDal.cs" />
     <Compile Include="Dal\SQLCEDal.cs" />
     <Compile Include="Manager\StatisticsManager.cs" />
     <Compile Include="Model\Channel.cs" />
