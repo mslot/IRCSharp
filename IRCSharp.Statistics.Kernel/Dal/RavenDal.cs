@@ -32,6 +32,7 @@ namespace IRCSharp.Statistics.Kernel.Dal
 					if (doesChannelExist)
 					{
 						//TODO: With partial update -> add query to channel
+						//dummy comment
 						Model.User user = GetUser(query.Nick);
 						user.AddQuery(query);
 						_session.Store(user);
