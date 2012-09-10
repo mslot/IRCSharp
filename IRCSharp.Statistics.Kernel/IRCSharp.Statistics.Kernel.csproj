@@ -105,11 +105,6 @@
     <Compile Include="Repository\StatisticsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Statistics.sdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\IRCSharp.Kernel.Model\IRCSharp.Kernel.Model.csproj">
       <Project>{8258F2F1-039A-4C9E-8046-7E7FC447DDB6}</Project>
       <Name>IRCSharp.Kernel.Model</Name>

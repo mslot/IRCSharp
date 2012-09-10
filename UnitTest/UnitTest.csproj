@@ -49,7 +49,6 @@
     <Compile Include="IRCParser\IRCParserTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RavenDal\AddQueryTest.cs" />
     <Compile Include="SQLCEDal\AddQueryTest.cs" />
     <Compile Include="UserdefinedCommand\UserdefinedParserTest.cs" />
   </ItemGroup>
