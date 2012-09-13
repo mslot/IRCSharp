@@ -26,6 +26,7 @@
 [Bb]in
 [Dd]ebug*/
 obj/
+packages/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*

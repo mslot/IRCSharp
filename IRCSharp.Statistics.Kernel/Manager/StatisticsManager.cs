@@ -11,7 +11,6 @@ namespace IRCSharp.Statistics.Kernel.Manager
 
 		public StatisticsManager()
 		{
-			//_databaseDal = new Dal.RavenDal(@"C:\data\testRavenDb", false);
 		}
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)

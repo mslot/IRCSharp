@@ -8,15 +8,13 @@ namespace IRCSharp.Statistics.Kernel.Model
 	public class Channel : IEquatable<Channel>
 	{
 		public List<IRCSharp.Kernel.Model.Query.IRCCommandQuery> Queries = new List<IRCSharp.Kernel.Model.Query.IRCCommandQuery>();
-		public string ChannelName { get; private set; }
+		public string Name { get; private set; }
 		public string Network { get; private set; } //TODO: implement network
-		public string FullPath { get { return Network + "/" + ChannelName; } }
-		public string Id { get; private set; }
+		public string FullPath { get { return Network + "/" + Name; } }
 
 		public Channel(string channelName)
 		{
-			ChannelName = channelName;
-			Id = FullPath;
+			Name = channelName;
 		}
 
 		public override bool Equals(object obj)

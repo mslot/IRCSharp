@@ -7,14 +7,12 @@ namespace IRCSharp.Statistics.Kernel.Model
 {
 	public class User
 	{
-		public string Id { get; private set; }
 		public List<Channel> Channels = new List<Channel>();
 		public string Nick { get; private set; }
 
 		public User(string nick)
 		{
 			Nick = nick;
-			Id = Nick;
 		}
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
@@ -23,7 +21,7 @@ namespace IRCSharp.Statistics.Kernel.Model
 
 			foreach (Channel channel in Channels)
 			{
-				if (channel.ChannelName == query.To) //TODO: is To an channel? Is it a comma seperated list of channels and users?
+				if (channel.Name == query.To) //TODO: is To an channel? Is it a comma seperated list of channels and users?
 				{
 					channel.Queries.Add(query);
 					found = true;
