@@ -68,6 +68,10 @@
       <Project>{2BCF5B79-0118-4D68-9A19-0FFFEC117685}</Project>
       <Name>IRCSharp.Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IRCSharp.Migrations\IRCSharp.Migrations.csproj">
+      <Project>{FF09359B-C95C-445B-8E55-62053CE81C0C}</Project>
+      <Name>IRCSharp.Migrations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IRCSharp.Statistics.Kernel\IRCSharp.Statistics.Kernel.csproj">
       <Project>{962DBF19-FD05-4256-AC3E-D441607AD1E9}</Project>
       <Name>IRCSharp.Statistics.Kernel</Name>
@@ -77,11 +81,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
 </Project>
