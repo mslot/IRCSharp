@@ -5,3 +5,4 @@ Dette er en intern dansk TODO liste jeg har lavet for at holde styr over hvad de
 	4. Netsplit handling.
 	5. Håndtering af mass quering.
 	6. Al henvisning til "network" skal laves om til "server", hvilket er mere sigende ifm. IRC osv.
+	7. Lav mere unit test på statistics
