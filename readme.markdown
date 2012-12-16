@@ -6,6 +6,10 @@ Quick start
 ----------
 See [Quick start guide] (https://github.com/mslot/IRCSharp/wiki/QuickStart). This readme has not been updated yet with examples on how to use the MessageQueue API, but I am in the process of writing one. If you are interested in seeing how it is done, then take a look in the MSMQTestProgram. Remember to install MessageQueue.
 
+Installing
+----------
+I am in the process of writing a paper on how to compile the bot. There is a bit of configuration to be set up because of database migrations and such. Send me a mail if you have any questions for now. The paper is going to be finished before the first full moon in 2013 :)
+
 Known bugs
 ----------
 This is the third beta release. So there is many UNKNOWN bugs. Be aware that this bot does not yet handle:
