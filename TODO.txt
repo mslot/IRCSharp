@@ -1,9 +1,7 @@
 Dette er en intern dansk TODO liste jeg har lavet for at holde styr over hvad det er jeg skal lave, da der kan gå lidt tid imellem udviklingen:
-	1. Statistics modulet skal laves færdig
-		1a. Der skal laves noget logik som kan opbygge en struktur ala "queries pr. kanal pr. bruger".
-	2. Lav auth logik så man eventuel skal være authed for at udføre nogle kommandoer.
-	3. Lav en SIMPEL logging motor som skriver til DB og mail.
-	4. Lave så userdefined commands og response commands bliver lagt i seperate mapper i dlls mappen.
-	5. Netsplit handling.
-	6. Håndtering af mass quering.
-	7. Al henvisning til "network" skal laves om til "server", hvilket er mere sigende ifm. IRC osv.
+	1. Lav auth logik så man eventuel skal være authed for at udføre nogle kommandoer.
+	2. Lav en SIMPEL logging motor som skriver til DB og mail.
+	3. Lave så userdefined commands og response commands bliver lagt i seperate mapper i dlls mappen.
+	4. Netsplit handling.
+	5. Håndtering af mass quering.
+	6. Al henvisning til "network" skal laves om til "server", hvilket er mere sigende ifm. IRC osv.
