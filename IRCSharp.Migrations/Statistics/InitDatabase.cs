@@ -20,6 +20,7 @@ namespace IRCSharp.Migrations.Statistics
 		{
 			Create.Table("User")
 				.WithColumn("nick").AsString()
+				.WithColumn("network").AsString()
 				.WithColumn("id").AsInt32()
 				.PrimaryKey()
 				.Unique()
@@ -37,6 +38,7 @@ namespace IRCSharp.Migrations.Statistics
 			Create.Table("Query")
 				.WithColumn("rawQuery").AsString()
 				.WithColumn("channelId").AsInt32().NotNullable()
+				.WithColumn("userId").AsInt32().NotNullable()
 				.WithColumn("id").AsInt32()
 				.PrimaryKey()
 				.Unique()
@@ -44,6 +46,7 @@ namespace IRCSharp.Migrations.Statistics
 
 			Create.ForeignKey("fk_channel_user").FromTable("Channel").ForeignColumn("userId").ToTable("User").PrimaryColumn("id");
 			Create.ForeignKey("fk_query_channel").FromTable("Query").ForeignColumn("channelId").ToTable("Channel").PrimaryColumn("id");
+			Create.ForeignKey("fk_query_user").FromTable("Query").ForeignColumn("userId").ToTable("User").PrimaryColumn("id");
 		}
 	}
 }

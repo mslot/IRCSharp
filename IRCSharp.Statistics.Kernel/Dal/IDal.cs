@@ -7,7 +7,12 @@ namespace IRCSharp.Statistics.Kernel.Dal
 {
 	public interface IDal : IDisposable
 	{
-		void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);
-		Model.User GetUser(string nick);
+		bool AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query);
+		Model.User GetUser(string network, string nick, int numberOfQueries);
+		void RemoveAllQueries();
+
+		void RemoveAllChannels();
+
+		void RemoveUsers();
 	}
 }

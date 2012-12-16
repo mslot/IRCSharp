@@ -9,16 +9,18 @@ namespace IRCSharp.Kernel.Model.Query
 	{
 		public string From { get; set; }
 		public string To { get; set; }
+		public string Network { get; set; }
 
 		public Commandbase()
 		{
 
 		}
 
-		public Commandbase(string from, string to)
+		public Commandbase(string from, string to, string network)
 		{
 			From = from;
 			To = to;
+			Network = network;
 		}
 	}
 }

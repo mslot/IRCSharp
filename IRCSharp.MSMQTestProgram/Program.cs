@@ -27,7 +27,7 @@ namespace IRCSharp.MSMQTestProgram
 			if (query.RawLine.Contains("gonggong"))
 			{
 				IRCSharp.Kernel.Model.Query.IRCCommandQuery toBot = null;
-				if (IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse("PRIVMSG #mslot.dk :kingkong", out toBot))
+				if (IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(query.Network,"PRIVMSG #mslot.dk :kingkong", out toBot))
 				{
 					Console.WriteLine("Trying to write to bot..." + query.RawLine);
 					_client.WriteToBot(toBot);

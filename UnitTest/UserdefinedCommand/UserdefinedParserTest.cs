@@ -15,7 +15,7 @@ namespace UnitTest.UserdefinedCommand
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!command arg1 arg2 arg3";
 			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
-			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
+			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse("network", line, out ircQuery);
 
 			Assert.True(parsedIRCQuery);
 
@@ -26,6 +26,7 @@ namespace UnitTest.UserdefinedCommand
 			Assert.True(parsedUserdefinedCommand);
 			Assert.AreEqual("mslot!~mslot@56344eba.rev.stofanet.dk", userdefinedCommandQuery.From);
 			Assert.AreEqual("#mslot.dk", userdefinedCommandQuery.To);
+			Assert.AreEqual("network", userdefinedCommandQuery.Network);
 			Assert.AreEqual("command", userdefinedCommandQuery.CommandName);
 			Assert.Contains("arg1", userdefinedCommandQuery.Parameters);
 			Assert.Contains("arg2", userdefinedCommandQuery.Parameters);
@@ -38,10 +39,10 @@ namespace UnitTest.UserdefinedCommand
 		{
 			string line = ":mslot!~mslot@56344eba.rev.stofanet.dk PRIVMSG #mslot.dk :!hello";
 			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
-			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
+			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse("network",line, out ircQuery);
 
 			Assert.True(parsedIRCQuery);
-
+			Assert.AreEqual("network", ircQuery.Network);
 			IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			bool parsedUserdefinedCommand = IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(ircQuery, out userdefinedCommandQuery);
 

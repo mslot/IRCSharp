@@ -15,11 +15,11 @@ namespace IRCSharp.Kernel.Parser.IRC
 			Context.CurrentState = new PrefixParser(Context);
 		}
 
-		public static bool TryParse(string line, out Model.Query.IRCCommandQuery query)
+		public static bool TryParse(string network, string line, out Model.Query.IRCCommandQuery query) //TODO: remake method call. Network should not be part of this. Wrap this up in some context that holds network and line.
 		{
 			var instance = new IRCQueryParser();
 			instance.Context.Line = line;
-			instance.Context.Query = new Model.Query.IRCCommandQuery(line);
+			instance.Context.Query = new Model.Query.IRCCommandQuery(line, network);
 			instance.Context.Query = query = instance.Parse();
 			bool errorProcessing = (instance.Context.CharCount != -1);
 			bool errorReachingEnd = (instance.Context.CharCount == instance.Context.Line.Length);

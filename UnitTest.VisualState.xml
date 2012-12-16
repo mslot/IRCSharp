@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]E:\Repos\Git\IRCSharp\UnitTest.nunit</TopNode>
+  <SelectedNode>[0-1016]E:\Repos\Git\IRCSharp\UnitTest\bin\Debug\UnitTest.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]E:\Repos\Git\IRCSharp\UnitTest.nunit" Expanded="true" />
+    <Node UniqueName="[0-1016]E:\Repos\Git\IRCSharp\UnitTest\bin\Debug\UnitTest.dll" Expanded="true" />
+    <Node UniqueName="[0-1017]UnitTest" Expanded="true" />
+    <Node UniqueName="[0-1019]UnitTest.IRCParser" Expanded="true" />
+    <Node UniqueName="[0-1003]UnitTest.IRCParser.ParserTest" Expanded="true" />
+    <Node UniqueName="[0-1018]UnitTest.SQLiteDal" Expanded="true" />
+    <Node UniqueName="[0-1001]UnitTest.SQLiteDal.AddQueryTest" Expanded="true" />
+    <Node UniqueName="[0-1020]UnitTest.UserdefinedCommand" Expanded="true" />
+    <Node UniqueName="[0-1013]UnitTest.UserdefinedCommand.UserdefinedParserTest" Expanded="true" />
+  </Nodes>
+</VisualState>

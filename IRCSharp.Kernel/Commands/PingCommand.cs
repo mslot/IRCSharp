@@ -13,7 +13,7 @@ namespace IRCSharp.Kernel.Manager.Commands
 			string[] commands = query.Parameter.Split(':');
 			Model.Query.IRCCommandQuery pongQuery = null;
 
-			Parser.IRC.IRCQueryParser.TryParse("PONG " + commands[1], out pongQuery);
+			Parser.IRC.IRCQueryParser.TryParse(query.Network, "PONG " + commands[1], out pongQuery);
 
 			return pongQuery;
 		}

@@ -18,12 +18,12 @@ namespace IRCSharp.Kernel.Parser.UserdefinedCommand
 		}
 
 
-		public static bool TryParse(string line, out Model.Query.UserdefinedCommandQuery query)
+		public static bool TryParse(string network, string line, out Model.Query.UserdefinedCommandQuery query) //TODO: remake method call. Network should not be part of this. Wrap this up in some context that holds network and line.
 		{
 			UserdefinedCommandParser parser = new UserdefinedCommandParser();
 			IRCSharp.Kernel.Model.Query.IRCCommandQuery ircQuery = null;
 			Model.Query.UserdefinedCommandQuery output = null;
-			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(line, out ircQuery);
+			bool parsedIRCQuery = IRCSharp.Kernel.Parser.IRC.IRCQueryParser.TryParse(network, line, out ircQuery);
 			bool parsed = false;
 
 			if (ircQuery.Command == Model.Query.IRCCommand.PRIVMSG && IsUserdefinedCommand(ircQuery.Parameter))

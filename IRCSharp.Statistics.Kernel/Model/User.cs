@@ -5,14 +5,16 @@ using System.Text;
 
 namespace IRCSharp.Statistics.Kernel.Model
 {
-	public class User
+	public class User : IComparable<User>
 	{
 		public List<Channel> Channels = new List<Channel>();
 		public string Nick { get; private set; }
+		public string Network { get; private set; }
 
-		public User(string nick)
+		public User(string network, string nick)
 		{
 			Nick = nick;
+			Network = network;
 		}
 
 		public void AddQuery(IRCSharp.Kernel.Model.Query.IRCCommandQuery query)
@@ -35,6 +37,14 @@ namespace IRCSharp.Statistics.Kernel.Model
 				newChannel.Queries.Add(query);
 				Channels.Add(newChannel);
 			}
+		}
+
+		public int CompareTo(User other)
+		{
+			string thisUser = Network + "/" + Nick;
+			string otherUser = Network + "/" + Nick;
+
+			return this.CompareTo(other);
 		}
 	}
 }

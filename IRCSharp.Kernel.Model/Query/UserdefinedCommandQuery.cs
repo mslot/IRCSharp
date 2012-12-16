@@ -12,6 +12,7 @@ namespace IRCSharp.Kernel.Model.Query
 		public string CommandName { get; private set; }
 		public string From { get { return IRCQuery.From; } }
 		public string To { get { return IRCQuery.To; } }
+		public string Network { get { return IRCQuery.Network; } }
 
 		public UserdefinedCommandQuery(string commandName, Query.IRCCommandQuery ircQuery)
 		{

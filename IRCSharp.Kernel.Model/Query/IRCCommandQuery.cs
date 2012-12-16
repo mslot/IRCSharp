@@ -18,13 +18,22 @@ namespace IRCSharp.Kernel.Model.Query
 
 		}
 
-		public IRCCommandQuery(string from, string to)
-			: base(from, to)
+		public IRCCommandQuery(string from, string to, string network)
+			: base(from, to, network)
 		{
 
 		}
 
-		public string Nick
+		public IRCCommandQuery(string line, string network)
+			: base(String.Empty, String.Empty, network)
+		{
+			RawLine = line;
+			Command = IRCCommand.NOT_VALID_COMMAND_TYPE;
+			Prefix = String.Empty;
+			Parameter = String.Empty;
+		}
+
+		public string Nick //TODO: should this be parsed by the parser? Maybe a new parser should be added, between PrefixParser and FromParser. See diagrams in kernel projects for more details
 		{
 			get
 			{
@@ -36,17 +45,8 @@ namespace IRCSharp.Kernel.Model.Query
 		{
 			get
 			{
-				return From;
+				return To; //TODO this is not always true. It is only a channel if name is prefixed with #.
 			}
-		}
-
-		public IRCCommandQuery(string line)
-			: base(String.Empty, String.Empty)
-		{
-			RawLine = line;
-			Command = IRCCommand.NOT_VALID_COMMAND_TYPE;
-			Prefix = String.Empty;
-			Parameter = String.Empty;
 		}
 
 		public override string ToString()
