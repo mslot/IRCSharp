@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]E:\Repos\Git\IRCSharp\NUnitProjectSuite.nunit</TopNode>
-  <SelectedNode>[0-1007]UnitTest.SQLiteDalTest.UserMslot2DataTest.TestUserMslot2Data</SelectedNode>
+  <SelectedNode>[0-1020]UnitTest.Security.AuthenticationProvider.XMLUserAuthenticationProviderTest.TryWithADeniedUser</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]E:\Repos\Git\IRCSharp\NUnitProjectSuite.nunit" Expanded="true" />
-    <Node UniqueName="[0-1022]E:\Repos\Git\IRCSharp\UnitTest\bin\Debug\UnitTest.dll" Expanded="true" />
-    <Node UniqueName="[0-1023]UnitTest" Expanded="true" />
-    <Node UniqueName="[0-1026]UnitTest.IRCParser" Expanded="true" />
+    <Node UniqueName="[0-1024]E:\Repos\Git\IRCSharp\UnitTest\bin\Debug\UnitTest.dll" Expanded="true" />
+    <Node UniqueName="[0-1025]UnitTest" Expanded="true" />
+    <Node UniqueName="[0-1028]UnitTest.IRCParser" Expanded="true" />
     <Node UniqueName="[0-1008]UnitTest.IRCParser.ParserTest" Expanded="true" />
-    <Node UniqueName="[0-1025]UnitTest.SQLiteDal" Expanded="true" />
+    <Node UniqueName="[0-1029]UnitTest.Security" Expanded="true" />
+    <Node UniqueName="[0-1030]UnitTest.Security.AuthenticationProvider" Expanded="true" />
+    <Node UniqueName="[0-1019]UnitTest.Security.AuthenticationProvider.XMLUserAuthenticationProviderTest" Expanded="true" />
+    <Node UniqueName="[0-1027]UnitTest.SQLiteDal" Expanded="true" />
     <Node UniqueName="[0-1003]UnitTest.SQLiteDal.AddQueryTest" Expanded="true" />
-    <Node UniqueName="[0-1024]UnitTest.SQLiteDalTest" Expanded="true" />
+    <Node UniqueName="[0-1026]UnitTest.SQLiteDalTest" Expanded="true" />
     <Node UniqueName="[0-1001]UnitTest.SQLiteDalTest.UserMslot1DataTest" Expanded="true" />
     <Node UniqueName="[0-1006]UnitTest.SQLiteDalTest.UserMslot2DataTest" Expanded="true" />
-    <Node UniqueName="[0-1027]UnitTest.UserdefinedCommand" Expanded="true" />
-    <Node UniqueName="[0-1019]UnitTest.UserdefinedCommand.UserdefinedParserTest" Expanded="true" />
+    <Node UniqueName="[0-1031]UnitTest.UserdefinedCommand" Expanded="true" />
+    <Node UniqueName="[0-1021]UnitTest.UserdefinedCommand.UserdefinedParserTest" Expanded="true" />
   </Nodes>
 </VisualState>

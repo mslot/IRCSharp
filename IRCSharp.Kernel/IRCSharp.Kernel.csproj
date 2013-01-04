@@ -48,6 +48,7 @@
     <Compile Include="Collectors\CommandCollecter.cs" />
     <Compile Include="IRCCommandAttribute.cs" />
     <Compile Include="CommandInformation.cs" />
+    <Compile Include="Manager\ICommandManager.cs" />
     <Compile Include="Messaging\Configuration\MessageServerConfiguration.cs" />
     <Compile Include="Messaging\MessageClient\MessageClient.cs" />
     <Compile Include="Messaging\MessageServer\MessageServer.cs" />

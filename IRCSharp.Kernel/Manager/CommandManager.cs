@@ -10,7 +10,7 @@ namespace IRCSharp.Kernel.Manager
 	/// 
 	/// TODO: More method comments. Some is deprecated!!
 	/// </summary>
-	public class CommandManager
+	public class CommandManager : ICommandManager
 	{
 		private Collections.UserdefinedCommandCollection _userdefinedCommands = new Collections.UserdefinedCommandCollection();
 		private Collections.IRCCommandCollection _ircCommands = new Collections.IRCCommandCollection();
@@ -76,7 +76,7 @@ namespace IRCSharp.Kernel.Manager
 			//TODO: remember to init the command
 		}
 
-		internal void InsertIRCCommand(Type commandType, Model.Query.IRCCommand name, string absoluteFilePath)
+		public void InsertIRCCommand(Type commandType, Model.Query.IRCCommand name, string absoluteFilePath)
 		{
 			CommandInformation<Model.Query.IRCCommand> information = new CommandInformation<Model.Query.IRCCommand>(commandType, name, absoluteFilePath);
 			InsertIRCCommand(information);

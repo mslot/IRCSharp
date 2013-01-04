@@ -6,8 +6,10 @@
   <Config name="Release" binpathtype="Auto" />
   <Config name="Debug|x86" binpathtype="Auto">
     <assembly path="UnitTest\bin\Debug\UnitTest.dll" />
+    <assembly path="UnitTest\bin\Debug\UnitTest.dll" />
   </Config>
   <Config name="Release|x86" binpathtype="Auto">
+    <assembly path="UnitTest\bin\Release\UnitTest.dll" />
     <assembly path="UnitTest\bin\Release\UnitTest.dll" />
   </Config>
 </NUnitProject>

@@ -1,0 +1,4 @@
+<users>
+	<user prefix="mslot1!~mslot1@56344eba.rev.stofanet.dk" network="network" allow="false"/>
+	<user prefix="mslot2!~mslot2@56344eba.rev.stofanet.dk" network="network" allow="true"/>
+</users>
