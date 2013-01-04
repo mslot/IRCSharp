@@ -16,7 +16,7 @@ namespace UnitTestConsoleRunner
 			if (returnCode != 0)
 				Console.Beep();
 
-			Console.WriteLine("press some key to exit ...");
+			Console.WriteLine("press the anykey to exit ...");
 			Console.ReadKey();
 		}
 	}
