@@ -23,12 +23,10 @@ namespace IRCSharp.Security
 			IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			if (IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(query, out userdefinedCommandQuery))
 			{
-				if (_authenticationProvider.AuthenticateUser(query.From))
+				User user;
+				if (_authenticationProvider.MayUserExecuteCommand(query.From, userdefinedCommandQuery.CommandName, out user))
 				{
-					if (_authenticationProvider.MayUserFireCommand(query.From, userdefinedCommandQuery.CommandName))
-					{
-						commands = _commandManager.FireUserdefinedCommand(query); //TODO make a FireUserdefinedCommand(Model.Query.UserdefinedCommandQuery query) in CommandManager. We do not need to parse userdefined query twice.
-					}
+					commands = _commandManager.FireUserdefinedCommand(query); //TODO make a FireUserdefinedCommand(Model.Query.UserdefinedCommandQuery query) in CommandManager. We do not need to parse userdefined query twice.
 				}
 			}
 

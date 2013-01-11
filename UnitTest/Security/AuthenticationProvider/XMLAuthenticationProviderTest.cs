@@ -26,21 +26,24 @@ namespace UnitTest.Security.AuthenticationProvider
 		[Test]
 		public void TryWithANoneExistantUser()
 		{
-			bool authenticated = _userProvider.AuthenticateUser("mslot3!~mslot3@56344eba.rev.stofanet.dk");
+			IRCSharp.Security.User user;
+			bool authenticated = _userProvider.TryAuthenticateUser("mslot3!~mslot3@56344eba.rev.stofanet.dk", out user);
 			Assert.False(authenticated);
 		}
 
 		[Test]
 		public void TryWithADeniedUser()
 		{
-			bool authenticated = _userProvider.AuthenticateUser("mslot1!~mslot1@56344eba.rev.stofanet.dk");
+			IRCSharp.Security.User user;
+			bool authenticated = _userProvider.TryAuthenticateUser("mslot1!~mslot1@56344eba.rev.stofanet.dk", out user);
 			Assert.False(authenticated);
 		}
 
 		[Test]
 		public void TryWithAuhenticatedUser()
 		{
-			bool authenticated = _userProvider.AuthenticateUser("mslot2!~mslot2@56344eba.rev.stofanet.dk");
+			IRCSharp.Security.User user;
+			bool authenticated = _userProvider.TryAuthenticateUser("mslot2!~mslot2@56344eba.rev.stofanet.dk", out user);
 			Assert.True(authenticated);
 		}
 	}

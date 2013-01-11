@@ -52,6 +52,7 @@
     <Compile Include="IRCParser\IRCParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthenticationProvider\XMLAuthenticationProviderTest.cs" />
+    <Compile Include="Security\CommandProvider\XMLCommandAuthenticationProviderTest.cs" />
     <Compile Include="SQLiteDalTest\AddQueryTest.cs" />
     <Compile Include="SQLiteDalTest\QueryTestBase.cs" />
     <Compile Include="SQLiteDalTest\UserMslot1DataTest.cs" />
@@ -71,7 +72,6 @@
     <Content Include="lib\nunit.framework.dll" />
     <Content Include="lib\nunit.util.dll" />
     <None Include="Resources\UserList.txt" />
-    <None Include="Resources\CommandList.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IRCSharp.Kernel.Model\IRCSharp.Kernel.Model.csproj">

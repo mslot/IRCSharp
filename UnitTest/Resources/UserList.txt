@@ -1,4 +1,14 @@
 <users>
-	<user prefix="mslot1!~mslot1@56344eba.rev.stofanet.dk" network="network" allow="false"/>
-	<user prefix="mslot2!~mslot2@56344eba.rev.stofanet.dk" network="network" allow="true"/>
+	<user prefix="mslot1!~mslot1@56344eba.rev.stofanet.dk" network="network" allow="false">
+		<commands>
+			<command name="commandName1" right="read"/>
+			<command name="commandName2" right="write"/>
+		</commands>
+	</user>
+	<user prefix="mslot2!~mslot2@56344eba.rev.stofanet.dk" network="network" allow="true">
+		<commands>
+			<command name="commandName1" right="read|write|execute"/>
+			<command name="commandName2" right="read"/>
+		</commands>
+	</user>
 </users>

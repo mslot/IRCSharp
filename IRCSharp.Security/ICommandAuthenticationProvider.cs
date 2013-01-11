@@ -7,6 +7,8 @@ namespace IRCSharp.Security
 {
 	public interface ICommandAuthenticationProvider
 	{
-		bool MayUserFireCommand(string user, string commandName);
+		bool MayUserWriteToCommand(string user, string commandName, out User commandUser);
+		bool MayUserReadFromCommand(string user, string commandName, out User commandUser);
+		bool MayUserExecuteCommand(string user, string commandName, out User commandUser);
 	}
 }

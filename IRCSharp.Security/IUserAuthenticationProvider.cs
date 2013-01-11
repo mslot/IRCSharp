@@ -7,6 +7,7 @@ namespace IRCSharp.Security
 {
 	public interface IUserAuthenticationProvider
 	{
-		bool AuthenticateUser(string userId);
+		//TODO: maybe we should provide an extra method like "GetUser" that just returns the user
+		bool TryAuthenticateUser(string userId, out User user);
 	}
 }

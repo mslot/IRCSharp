@@ -61,29 +61,19 @@ namespace UnitTest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!--
-        ///	execute = read &amp;&amp; write
-        ///--&gt;
-        ///
-        ///&lt;commands&gt;
-        ///	&lt;command name=&quot;commandName1&quot; right=&quot;deny&quot;&gt;
-        ///		&lt;user prefix=&quot;prefix=&quot;mslot1!~mslot1@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; right=&quot;execute&quot;&gt;
-        ///		&lt;user prefix=&quot;prefix=&quot;mslot2!~mslot2@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; right=&quot;execute&quot;&gt;
-        ///		&lt;user prefix=&quot;prefix=&quot;mslot3!~mslot3@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; right=&quot;read&quot;&gt;
-        ///	&lt;/command&gt;
-        ///	&lt;command name=&quot;commandName1&quot; right=&quot;allow&quot;&gt;
-        ///		&lt;user prefix=&quot;prefix=&quot;mslot3!~mslot3@56344eba.rev.stofa [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string CommandList {
-            get {
-                return ResourceManager.GetString("CommandList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;users&gt;
-        ///	&lt;user prefix=&quot;prefix=&quot;mslot1!~mslot1@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; right=&quot;deny&quot;/&gt;
-        ///	&lt;user prefix=&quot;prefix=&quot;mslot2!~mslot2@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; right=&quot;allow&quot;/&gt;
+        ///	&lt;user prefix=&quot;mslot1!~mslot1@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; allow=&quot;false&quot;&gt;
+        ///		&lt;commands&gt;
+        ///			&lt;command name=&quot;commandName1&quot; right=&quot;read&quot;/&gt;
+        ///			&lt;command name=&quot;commandName2&quot; right=&quot;write&quot;/&gt;
+        ///		&lt;/commands&gt;
+        ///	&lt;/user&gt;
+        ///	&lt;user prefix=&quot;mslot2!~mslot2@56344eba.rev.stofanet.dk&quot; network=&quot;network&quot; allow=&quot;true&quot;&gt;
+        ///		&lt;commands&gt;
+        ///			&lt;command name=&quot;commandName1&quot; right=&quot;read|write|execute&quot;/&gt;
+        ///			&lt;command name=&quot;commandName2&quot; right=&quot;read&quot;/&gt;
+        ///		&lt;/commands&gt;
+        ///	&lt;/user&gt;
         ///&lt;/users&gt;.
         /// </summary>
         internal static string UserList {

@@ -7,7 +7,7 @@ namespace IRCSharp.Security
 {
 	public abstract class UserAuthenticationProviderBase : IUserAuthenticationProvider
 	{
-		public bool AuthenticateUser(string userId)
+		public bool TryAuthenticateUser(string userId, out User user)
 		{
 			User foundUser = GetUser(userId);
 			bool isAuthenticated = false;
@@ -15,7 +15,7 @@ namespace IRCSharp.Security
 			{
 				isAuthenticated = foundUser.IsAuthenticated;
 			}
-
+			user = foundUser;
 			return isAuthenticated;
 		}
 
