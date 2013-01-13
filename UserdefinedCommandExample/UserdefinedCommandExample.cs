@@ -24,7 +24,7 @@ namespace UserdefinedCommandExample
 
 			}
 
-			//Execute rights is handled by the system, and can not yet be overruled.
+			//Execute rights is handled by the system if using the IRCSharp.Kernel.SecureManager.
 
 			//This is how you get the parameters from the query
 			Console.WriteLine("hello from command: " + query.CommandName);
