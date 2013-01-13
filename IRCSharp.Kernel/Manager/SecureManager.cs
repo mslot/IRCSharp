@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IRCSharp.Security;
 
-namespace IRCSharp.Security
+namespace IRCSharp.Kernel
 {
-	class SecureManager : IRCSharp.Kernel.Manager.ICommandManager
+	public class SecureManager : Manager.ICommandManager
 	{
-		private IRCSharp.Kernel.Manager.ICommandManager _commandManager;
-		private IAuthenticationProvider _authenticationProvider;
+		private Manager.ICommandManager _commandManager;
+		private Security.IAuthenticationProvider _authenticationProvider;
 
-		public SecureManager(IRCSharp.Kernel.Manager.ICommandManager commandManager, IAuthenticationProvider authenticationProvider)
+		public SecureManager(Manager.ICommandManager commandManager, Security.IAuthenticationProvider authenticationProvider)
 		{
 			_commandManager = commandManager;
 			_authenticationProvider = authenticationProvider;
@@ -23,7 +22,7 @@ namespace IRCSharp.Security
 			IRCSharp.Kernel.Model.Query.UserdefinedCommandQuery userdefinedCommandQuery;
 			if (IRCSharp.Kernel.Parser.UserdefinedCommand.UserdefinedCommandParser.TryParse(query, out userdefinedCommandQuery))
 			{
-				User user;
+				IRCSharp.Kernel.Security.User user;
 				if (_authenticationProvider.MayUserExecuteCommand(query.From, userdefinedCommandQuery.CommandName, out user))
 				{
 					commands = _commandManager.FireUserdefinedCommand(query); //TODO make a FireUserdefinedCommand(Model.Query.UserdefinedCommandQuery query) in CommandManager. We do not need to parse userdefined query twice.

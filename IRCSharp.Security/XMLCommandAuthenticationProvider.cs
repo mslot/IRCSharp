@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Security
+namespace IRCSharp.Kernel.Security
 {
 	///TODO: this class should, strickly speaking, load from an xml document, but I am in no need of that now
 	///		 and therefore I put this responsability on the UserAuthenticationProvider.

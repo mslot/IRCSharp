@@ -86,9 +86,9 @@
       <Project>{FF09359B-C95C-445B-8E55-62053CE81C0C}</Project>
       <Name>IRCSharp.Migrations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IRCSharp.Security\IRCSharp.Security.csproj">
+    <ProjectReference Include="..\IRCSharp.Security\IRCSharp.Kernel.Security.csproj">
       <Project>{549E70D6-5363-4EB5-9296-438F0BDD7FCF}</Project>
-      <Name>IRCSharp.Security</Name>
+      <Name>IRCSharp.Kernel.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRCSharp.Statistics.Kernel\IRCSharp.Statistics.Kernel.csproj">
       <Project>{962DBF19-FD05-4256-AC3E-D441607AD1E9}</Project>

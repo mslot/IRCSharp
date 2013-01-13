@@ -52,6 +52,10 @@
       <Project>{2BCF5B79-0118-4D68-9A19-0FFFEC117685}</Project>
       <Name>IRCSharp.Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IRCSharp.Security\IRCSharp.Kernel.Security.csproj">
+      <Project>{549E70D6-5363-4EB5-9296-438F0BDD7FCF}</Project>
+      <Name>IRCSharp.Kernel.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

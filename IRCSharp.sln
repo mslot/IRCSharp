@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserdefinedCommandExample",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.Migrations", "IRCSharp.Migrations\IRCSharp.Migrations.csproj", "{FF09359B-C95C-445B-8E55-62053CE81C0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.Security", "IRCSharp.Security\IRCSharp.Security.csproj", "{549E70D6-5363-4EB5-9296-438F0BDD7FCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCSharp.Kernel.Security", "IRCSharp.Security\IRCSharp.Kernel.Security.csproj", "{549E70D6-5363-4EB5-9296-438F0BDD7FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestConsoleRunner", "UnitTestConsoleRunner\UnitTestConsoleRunner.csproj", "{C330D706-2F80-4D10-8528-059B1124AF59}"
 EndProject

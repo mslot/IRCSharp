@@ -59,6 +59,7 @@
     <Compile Include="Parser\UserdefinedCommand\UserdefinedCommandParser.cs" />
     <Compile Include="Query\Writer\IRCWriter.cs" />
     <Compile Include="ResponseCommandBase.cs" />
+    <Compile Include="Manager\SecureManager.cs" />
     <Compile Include="UserdefinedCommandAttribute.cs" />
     <Compile Include="UserdefinedCommandBase.cs" />
     <Compile Include="Commands\PingCommand.cs" />
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\IRCSharp.MSMQ\IRCSharp.MSMQ.csproj">
       <Project>{D0440F07-2852-413E-BD56-3C5BC245EE0E}</Project>
       <Name>IRCSharp.MSMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRCSharp.Security\IRCSharp.Kernel.Security.csproj">
+      <Project>{549E70D6-5363-4EB5-9296-438F0BDD7FCF}</Project>
+      <Name>IRCSharp.Kernel.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRCSharp.Threading\IRCSharp.Threading.csproj">
       <Project>{1D617C59-75C9-43C3-AC71-A5520AB3478B}</Project>

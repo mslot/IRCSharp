@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Security
+namespace IRCSharp.Kernel.Security
 {
 	public class XMLUserAuthenticationProvider : UserAuthenticationProviderBase //TODO: CRITIC: open/close of stream should be handled properly
 	{

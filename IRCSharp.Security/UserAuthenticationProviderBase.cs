@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCSharp.Security
+namespace IRCSharp.Kernel.Security
 {
 	public abstract class UserAuthenticationProviderBase : IUserAuthenticationProvider
 	{
