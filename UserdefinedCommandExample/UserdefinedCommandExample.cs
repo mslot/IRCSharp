@@ -19,10 +19,12 @@ namespace UserdefinedCommandExample
 			}
 
 			IRCSharp.Kernel.Security.User userRead;
-			base.authenticationProvider.MayUserWriteToCommand(query.From, "hello", out userRead);
+			base.authenticationProvider.MayUserReadFromCommand(query.From, "hello", out userRead);
 			{
 
 			}
+
+			//Execute rights is handled by the system, and can not yet be overruled.
 
 			//This is how you get the parameters from the query
 			Console.WriteLine("hello from command: " + query.CommandName);
